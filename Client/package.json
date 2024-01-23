@@ -1,0 +1,27 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^5.13.2",
+    "antd-img-crop": "^4.21.0",
+    "aos": "^2.3.4",
+    "axios": "^1.6.5",
+    "chart.js": "^4.4.1",
+    "cloudinary": "^1.41.3",
+    "cloudinary-react": "^1.8.1",
+    "firebase": "^10.7.2",
+    "mercadopago": "^2.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io-client": "^4.7.4",
+    "sweetalert2": "^11.10.4"
+  }
+}
