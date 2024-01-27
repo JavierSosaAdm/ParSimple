@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const router = require('./routes/mainRouter');
+const mainRouter = require('./routes/mainRouter');
 const http = require('http');
 const { Server : SocketServer } = require('socket.io')
 const { create } = require('domain');
@@ -42,6 +42,6 @@ server.use((req, res, next) => {
       next();
 });
 
-// server.use(router) 
+// server.use(mainRouter) 
 
 module.exports = server;
