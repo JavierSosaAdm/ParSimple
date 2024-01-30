@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize');
-const userModel = require('./models/users');
-const productModel = require('./models/product');
-const product = require('./models/product');
+const userModel = require('./models/produtc');
+const productModel = require('./models/user');
+const product = require('./models/user');
 
 require('dotenv').config();
 

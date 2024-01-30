@@ -2,15 +2,19 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (dataBase) => {
     dataBase.define(
-        'Product', {
-            id_product: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
-                primaryKey: true 
+        'User', {
+            uid: {
+                type: DataTypes.STRING,
+                primaryKey: false,
+                allowNull: false,
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             size: {
                 type: DataTypes.STRING,
@@ -22,19 +26,26 @@ module.exports = (dataBase) => {
             },
             phone: {
                 type: DataTypes.NUMERIC,
-                allowNull: true
+                allowNull: false
             },
             image: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            is_Admin: {
+                type: DataTypes.BOOLEAN,
+                defaultvalue: false
+            },
+            is_Delete: {
+                type: DataTypes.BOOLEAN,
+                defaultvalue: false
             }
-
         },
         {
             freezeTableName: true,
             timestamps: false,
-            createdAt:false,
-            updatedAt:false
+            createdAt: false,
+            updatedAt: false
         }
     )
 };
