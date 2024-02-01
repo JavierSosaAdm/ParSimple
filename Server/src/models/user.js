@@ -5,7 +5,7 @@ module.exports = (dataBase) => {
         'User', {
             uid: {
                 type: DataTypes.STRING,
-                primaryKey: false,
+                primaryKey: true,
                 allowNull: false,
             },
             name: {

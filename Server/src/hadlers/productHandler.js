@@ -1,23 +1,95 @@
 const {
     getAllProductController,
     getProductNameController,
-    productIDController,
+    getProductByIDController,
     putProductController,
     deleteProductController,
     postProductController
 } = require('../controllers/productController')
 
-const getAllProduct = () => {};
+const getAllProduct = async(req, res) => {
+    try {
+        const result = await getAllProductController();
+        return res.status(200).json(result)
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
 
-const getProductByID = () => {};
+const getProductByID = async(req, res) => {
+    const {id} = req.params;
 
-const getProductByName = () => {};
+    try {
+        const producID = await getProductByIDController(id);
+        return res.status(200).json(producID)
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
 
-const putProduct = () => {};
+const getProductByName = async(req, res) => {
+    try {
+        
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
 
-const deleteProduct = () => {};
+const putProduct = async(req, res) => {
+    const {id} = req.params;
+    const { name, price, image, size, description, rating, reviewsCount, category, stock_quantity, is_Delete } = req.body;
+    try {
+        const data = {
+            name: name, 
+            price: price, 
+            image: image, 
+            size: size,
+            description: description, 
+            rating: rating, 
+            reviewsCount: reviewsCount, 
+            category: category, 
+            stock_quantity: stock_quantity, 
+            is_Delete: is_Delete 
+        }
+        const editProduct = await putProductController(id, data)
+        return res.status(200).json(editProduct);
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
 
-const postProduct = () => {};
+const deleteProduct = async(req, res) => {
+    const {id} = req.params;
+    try {
+        const productDelete = await deleteProductController(id)
+        return res.status(200).json({message: `El producto ${productDelete.name} fue eliminado correctamente`})
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
+
+const postProduct = async (req, res) => {
+    const { id_product, name, price, image, size, description, rating, reviewsCount, category, stock_quantity, is_Delete } = req.body;
+    try {
+        const data = { 
+            id_product: id_product, 
+            name: name, 
+            price: price, 
+            image: image, 
+            size: size,
+            description: description, 
+            rating: rating, 
+            reviewsCount: reviewsCount, 
+            category: category, 
+            stock_quantity: stock_quantity, 
+            is_Delete: is_Delete 
+        }
+        const newProduct = await postProductController(data)
+        return res.status(200).json(newProduct)
+    } catch (error) {
+        return res.status(400).json({message: error})
+    }
+};
 
 module.exports = {
     getAllProduct,

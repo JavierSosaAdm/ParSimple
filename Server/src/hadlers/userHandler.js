@@ -1,7 +1,7 @@
 
 const {
     getAllUserController,
-    getUserNameController,
+    // getUserNameController,
     userIDController,
     putUserController,
     deleteUserController,
@@ -64,7 +64,7 @@ const deleteUser = async (req, res) => {
 
     try {
         const deleteUser = await deleteUserController(id);
-        return res.status(200).json(result)
+        return res.status(200).json({message: `El usuario ${deleteUser.name} fue eliminado correctamente`})
     } catch (error) {
         return res.status(400).json({message: error});
     }
@@ -83,7 +83,8 @@ const postUser = async (req, res) => {
             size: size,
             image: image,
             phone: Number(phone),
-            is_Admin: is_Admin
+            is_Admin: is_Admin,
+            is_Delete: is_Delete
         }
         const result = await postUserController(data)
         res.status(200).json(result);

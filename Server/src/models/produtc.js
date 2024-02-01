@@ -6,19 +6,19 @@ module.exports = (dataBase) => {
             id_product:{
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true 
+                primaryKey: true,
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false
             },
             price: {
-                type: DataTypes.NUMERIC,
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             size: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false
             },
             description: {
                 type: DataTypes.TEXT,
@@ -38,11 +38,15 @@ module.exports = (dataBase) => {
             },
             stock_quantity: {
                 type:DataTypes.INTEGER,
-                allowNull:true
+                allowNull: true
               },
             is_Delete: {
                 type:DataTypes.BOOLEAN,
                 defaultValue: false
+            },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
 
         },

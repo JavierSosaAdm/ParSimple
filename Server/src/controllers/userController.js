@@ -1,4 +1,4 @@
-const { User, Product } = require('../app')
+const { User } = require('../app')
 const { Op } = require("sequelize");
 
 const getAllUserController = async () => {
@@ -34,11 +34,12 @@ const postUserController = async (data) => {
             },
             default: data,
         });
-        if (created) {
-            // Si el usuario es recién creado, también crea un carrito y asócialo
-        }
+        // if (created) {
+        //     // Si el usuario es recién creado, también crea un carrito y asócialo
+        // }
         return user
     } catch (error) {
+        console.error('Error en postProductController:', error);
         throw error;
     }
 };
