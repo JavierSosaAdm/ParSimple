@@ -1,4 +1,4 @@
-const { User } = require('../app')
+const { User } = require('../db')
 const { Op } = require("sequelize");
 
 const getAllUserController = async () => {
@@ -27,19 +27,22 @@ const deleteUserController = async (id) => {
 };
 
 const postUserController = async (data) => {
+    console.log('esto es data: ', data);
     try {
         const [user, created] = await User.findOrCreate({
             where: {
                 email: data.email
             },
-            default: data,
+            defaults: data,
         });
-        // if (created) {
-        //     // Si el usuario es recién creado, también crea un carrito y asócialo
-        // }
+        if (created) {
+            // Si el usuario es recién creado, también crea un carrito y asócialo
+            console.log('esto es created:' , created);
+            return created;
+        }
         return user
     } catch (error) {
-        console.error('Error en postProductController:', error);
+        console.error('Error en postUserController:', error);
         throw error;
     }
 };

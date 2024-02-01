@@ -40,17 +40,19 @@ const getUserByID = async (req, res) => {
 
 const putUser = async (req, res) => {
     const {id} = req.params
-    const {name, lastName, email, address, size, image, phone, is_Admin, is_Delete} = req.body
+    const {uid, email, password, name, lastName, address, phone, image, is_Admin, is_Delete} = req.body
     try {
         const data = {
+            uid: uid,
+            email: email,
+            password: password,
             name: name,
             lastName: lastName,
-            email: email,
             address: address,
-            size: size,
+            phone: phone,
             image: image,
-            phone: Number(phone),
-            is_Admin: is_Admin
+            is_Admin: is_Admin,
+            is_Delete: is_Delete
         }
         const result = await putUserController(id, data);
         return res.status(200).json(result);
@@ -64,7 +66,7 @@ const deleteUser = async (req, res) => {
 
     try {
         const deleteUser = await deleteUserController(id);
-        return res.status(200).json({message: `El usuario ${deleteUser.name} fue eliminado correctamente`})
+        return res.status(200).json({message: `El usuario ${deleteUser.uid} fue eliminado correctamente`})
     } catch (error) {
         return res.status(400).json({message: error});
     }
@@ -72,22 +74,22 @@ const deleteUser = async (req, res) => {
 
 const postUser = async (req, res) => {
    
-    const {uid, name, lastName, email, address, size, image, phone, is_Admin, is_Delete} = req.body
+    const {uid, email, password, name, lastName, address, phone, image, is_Admin, is_Delete} = req.body
     try {
         const data = {
             uid: uid,
+            email: email,
+            password: password,
             name: name,
             lastName: lastName,
-            email: email,
             address: address,
-            size: size,
+            phone: phone,
             image: image,
-            phone: Number(phone),
             is_Admin: is_Admin,
             is_Delete: is_Delete
         }
-        const result = await postUserController(data)
-        res.status(200).json(result);
+        const newUser = await postUserController(data)
+        return res.status(200).json(newUser);
     } catch (error) {
         return res.status(400).json({message: error});
     }
@@ -95,9 +97,9 @@ const postUser = async (req, res) => {
 
 module.exports = {
     getAllUser,
-    
     getUserByID,
     putUser,
     deleteUser,
     postUser
 }
+    

@@ -24,7 +24,7 @@ productModel(dataBase)
 
 // Relaciones
 
-const { User, Product } = dataBase.models;
+const { Product, User } = dataBase.models;
 
 //*un usuario puede comprar varios productos y un producto puede ser comprado por varios usuarios
 User.belongsToMany(Product, {through: 'user_product'})
