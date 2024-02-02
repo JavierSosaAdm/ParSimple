@@ -6,7 +6,7 @@ const PORT = 3001
 
 const startServer = async () => {
     try {
-        await dataBase.sync({alter: true})
+        await dataBase.sync({force: true})
         server.listen(PORT, () => {
             console.log(`Server of par simple listening on port ${PORT}`);
         });
