@@ -1,4 +1,5 @@
-const { Product } = require('../db')
+const { Op } = require("sequelize");
+const { Product, Categorie } = require('../db');
 
 const getAllProductController = async () => { //Funciona
     const allProduct = await Product.findAll();
@@ -47,6 +48,14 @@ const postProductController = async (data) => { //funciona
     console.log('esto es newProduct: ►', newProduct);
         if (newProduct) {
             // Si el producto es recién creado, también crea un carrito y asócialo
+            const categorie = await Categorie.findOne({
+                where: {
+                    name: newProduct.name,
+                }
+            })
+
+            if (categorie) {
+                newProduct.setCategorie(categorie)          }
             return newProduct;
         }
         return product

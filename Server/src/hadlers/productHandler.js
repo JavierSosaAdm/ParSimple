@@ -12,7 +12,7 @@ const getAllProduct = async(req, res) => {
         const result = await getAllProductController();
         return res.status(200).json(result)
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 
@@ -23,7 +23,7 @@ const getProductByID = async(req, res) => {
         const producID = await getProductByIDController(id);
         return res.status(200).json(producID)
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 
@@ -31,7 +31,7 @@ const getProductByName = async(req, res) => {
     try {
         
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 
@@ -54,7 +54,7 @@ const putProduct = async(req, res) => {
         const editProduct = await putProductController(id, data)
         return res.status(200).json(editProduct);
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 
@@ -64,7 +64,7 @@ const deleteProduct = async(req, res) => {
         const productDelete = await deleteProductController(id)
         return res.status(200).json({message: `El producto ${productDelete.name} fue eliminado correctamente`})
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 
@@ -87,7 +87,7 @@ const postProduct = async (req, res) => {
         const newProduct = await postProductController(data)
         return res.status(200).json(newProduct)
     } catch (error) {
-        return res.status(400).json({message: error})
+        return res.status(400).json({error: error.message})
     }
 };
 

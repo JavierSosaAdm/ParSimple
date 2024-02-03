@@ -15,7 +15,7 @@ const getAllUser = async (req, res) => {
         const result = await getAllUserController()
         return res.status(200).json(result);
     } catch (error) {
-        return res.status(400).json({message: error});
+        return res.status(400).json({error: error.message});
     }
 };
 
@@ -23,7 +23,7 @@ const getAllUser = async (req, res) => {
 //     try {
         
 //     } catch (error) {
-//         return res.status(400).json({message: error});
+//         return res.status(400).json({error: error.message});
 //     }
 // };
 
@@ -34,7 +34,7 @@ const getUserByID = async (req, res) => {
         const result = await userIDController(id)
         return res.status(200).json(result);
     } catch (error) {
-        return res.status(400).json({message: error});
+        return res.status(400).json({error: error.message});
     }
 };
 
@@ -57,7 +57,7 @@ const putUser = async (req, res) => {
         const result = await putUserController(id, data);
         return res.status(200).json(result);
     } catch (error) {
-        return res.status(400).json({message: error});
+        return res.status(400).json({error: error.message});
     }
 };
 
@@ -68,7 +68,7 @@ const deleteUser = async (req, res) => {
         const deleteUser = await deleteUserController(id);
         return res.status(200).json({message: `El usuario ${deleteUser.uid} fue eliminado correctamente`})
     } catch (error) {
-        return res.status(400).json({message: error});
+        return res.status(400).json({error: error.message});
     }
 };
 
@@ -91,7 +91,7 @@ const postUser = async (req, res) => {
         const newUser = await postUserController(data)
         return res.status(200).json(newUser);
     } catch (error) {
-        return res.status(400).json({message: error});
+        return res.status(400).json({error: error.message});
     }
 };
 
