@@ -6,6 +6,7 @@ const categoryModel = require("./models/category");
 const paymentModel = require("./models/payment");
 const requestModel = require("./models/request");
 const reviewModel = require("./models/review");
+const messageModel = require("./models/message");
 
 require('dotenv').config();
 
@@ -30,10 +31,11 @@ categoryModel(dataBase);
 paymentModel(dataBase);
 requestModel(dataBase);
 reviewModel(dataBase);
+messageModel(dataBase);
 
 // Relaciones
 
-const { Product, User, Cart, Category, Payment, Request, Review } = dataBase.models;
+const { Product, User, Cart, Category, Payment, Request, Review, Message } = dataBase.models;
 
 //*un producto puede tener una categoria y una categoria puede tener varios productos 1:N
 Category.hasMany(Product, { foreignKey: 'id_category' });
