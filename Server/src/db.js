@@ -4,7 +4,9 @@ const productModel = require("./models/user");
 const cartModel = require("./models/cart");
 const categoryModel = require("./models/category");
 const paymentModel = require("./models/payment");
-const requestModel = require("./models/request")
+const requestModel = require("./models/request");
+const reviewModel = require("./models/review");
+const messageModel = require("./models/message");
 
 require('dotenv').config();
 
@@ -28,10 +30,12 @@ cartModel(dataBase);
 categoryModel(dataBase);
 paymentModel(dataBase);
 requestModel(dataBase);
+reviewModel(dataBase);
+messageModel(dataBase);
 
 // Relaciones
 
-const { Product, User, Cart, Category, Payment, Request } = dataBase.models;
+const { Product, User, Cart, Category, Payment, Request, Review, Message } = dataBase.models;
 
 //*un producto puede tener una categoria y una categoria puede tener varios productos 1:N
 Category.hasMany(Product, { foreignKey: 'id_category' });
@@ -64,6 +68,7 @@ Payment.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
 //*Un usuario puede hacer varios pedidos, y cada pedido pertenece a un solo usuario N:1
 User.hasMany(Request, {foreignKey: "uid", onDelete: 'CASCADE'});
 Request.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
+
 
 
 
