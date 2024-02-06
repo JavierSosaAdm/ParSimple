@@ -17,5 +17,5 @@ productsRouter.get('/', getAllProduct)
               .put('/:id', putProduct)
               .delete('/:id', deleteProduct)
 
-module.exports= productsRouter;
+module.exports = productsRouter;
 
