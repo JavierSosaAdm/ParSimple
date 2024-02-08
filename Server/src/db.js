@@ -8,6 +8,7 @@ const requestModel = require("./models/request");
 const reviewModel = require("./models/review");
 const messageModel = require("./models/message");
 
+
 require('dotenv').config();
 
 const {
@@ -32,6 +33,7 @@ paymentModel(dataBase);
 requestModel(dataBase);
 reviewModel(dataBase);
 messageModel(dataBase);
+
 
 // Relaciones
 
@@ -68,8 +70,6 @@ Payment.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
 //*Un usuario puede hacer varios pedidos, y cada pedido pertenece a un solo usuario N:1
 User.hasMany(Request, {foreignKey: "uid", onDelete: 'CASCADE'});
 Request.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
-
-
 
 
 
