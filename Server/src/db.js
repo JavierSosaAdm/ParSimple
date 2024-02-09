@@ -76,8 +76,8 @@ User.hasMany(Message, {foreignKey: 'uid'});
 Message.belongsTo(User, {foreignKey: 'uid'});
 
 //*Varios usuarios y productos pueden tener varias reviews N:N
-User.hasMany(Product, {foreignKey: 'id_product'});
-Product.hasMany(User, {foreignKey: 'uid'});
+User.hasMany(Product, {foreignKey: 'uid'});
+Product.hasMany(User, {foreignKey: 'id_product'});
 
 //*Cada review pertenece a un solo usuario y un solo producto 1:1
 Review.belongsTo(User, {foreignKey: 'uid'});

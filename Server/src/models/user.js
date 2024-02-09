@@ -43,6 +43,14 @@ module.exports = (dataBase) => {
             is_Delete: {
                 type: DataTypes.BOOLEAN,
                 defaultvalue: false
+            },
+            isBlocked:{
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
+            },
+            payment_code:{
+                type:DataTypes.STRING,
+                allowNull: true,
             }
         },
         {
