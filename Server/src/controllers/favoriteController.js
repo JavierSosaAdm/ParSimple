@@ -3,11 +3,11 @@ const { User, Product } = require("../db");
 
 const getFavController = async (uid) => {
     const user = await User.findByPk(uid);
-    console.log('esto es user', user);
     
+    console.log('esto es user: ', user);
     if (user) {
-        const favorites = await User.getProduct();
-        console.log('esto es favorites', favorites);
+        const favorites = await user.getProducts();
+        // console.log('esto es favorites', favorites);
         if (favorites.length > 0) return favorites; 
         else return [];
     }
@@ -16,9 +16,10 @@ const getFavController = async (uid) => {
 
 const getFavByIDController = async (uid, id_product) => {
     const user = await User.findByPk(uid);
-
+    
     if (user) {
-        const favorites = await user.getPruduct();
+        const favorites = await user.getProducts();
+        console.log('esto es favorites: ', favorites);
         if (favorites.length > 0) {
             const products = favorites.find(favorite => favorite.id_product === id_product);
             console.log(favorites);

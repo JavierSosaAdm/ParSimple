@@ -1,15 +1,29 @@
-const { User } = require('../db')
+const { User, Cart, Request, Product, Payment } = require('../db')
 const { Op } = require("sequelize");
 
 const getAllUserController = async () => {
-    const users = await User.findAll()
+    const users = await User.findAll({
+        include: [Cart, Request, Product, Payment]
+    })
     return users;
 };
 
-// const getUserNameController = () => {};
+
+const getUserNameController = async (name)=>{
+    
+    const result = await User.findAll({
+        where : {
+            name: {[Op.iLike]: `%${name}%`}
+        } 
+    })
+    console.log('esto es result: ', result);
+    return result
+}
 
 const userIDController = async (id) => {
-    const userId = await User.findByPk(id)
+    const userId = await User.findByPk(id, {
+        include: [Cart, Request, Product, Payment]
+    })
     return userId;
 };
 
@@ -49,9 +63,33 @@ const postUserController = async (data) => {
 
 module.exports = {
     getAllUserController,
-    // getUserNameController,
+    getUserNameController,
     userIDController,
     putUserController,
     deleteUserController,
     postUserController
 };
+
+// const getUserNameController = async (name) => {
+//     const nameLower = name.toLowerCase();
+//     const name2 = nameLower.charAt(0).toUpperCase() + nameLower.slice(1)
+
+//     const nameUser = await User.findAll({
+//         where: {
+//             name: {[Op.iLike]: `${name2}` },
+//         }
+//     });
+//     const lastNameUser = await User.findAll({
+//         where: {
+//             lastName: {[Op.iLike]: `${name2}`}
+//         }
+//     });
+
+//     const nameDB = [...nameUser, ...lastNameUser]
+//     const firterName = nameDB.filter(response => {
+//         return response.name === name2
+//         ? response.name === name2
+//         : response.lastName === name2
+//     })
+//     return firterName;
+// };

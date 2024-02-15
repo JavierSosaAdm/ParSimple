@@ -69,7 +69,7 @@ const deleteProduct = async(req, res) => {
 };
 
 const postProduct = async (req, res) => {
-    const { id_product, name, price, image, size, description, rating, reviewsCount, category, stock_quantity, is_Delete } = req.body;
+    const { id_product, name, price, image, size, description, rating, reviewsCount, category, type, stock_quantity, is_Delete } = req.body;
     try {
         const data = { 
             id_product: id_product, 
@@ -80,7 +80,8 @@ const postProduct = async (req, res) => {
             description: description, 
             rating: rating, 
             reviewsCount: reviewsCount, 
-            category: category, 
+            category: category,
+            type: type, 
             stock_quantity: stock_quantity, 
             is_Delete: is_Delete 
         }
