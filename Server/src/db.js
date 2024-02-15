@@ -8,6 +8,7 @@ const requestModel = require("./models/request");
 const reviewModel = require("./models/review");
 const messageModel = require("./models/message");
 
+
 require('dotenv').config();
 
 const {
@@ -32,6 +33,7 @@ paymentModel(dataBase);
 requestModel(dataBase);
 reviewModel(dataBase);
 messageModel(dataBase);
+
 
 // Relaciones
 
@@ -69,9 +71,17 @@ Payment.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
 User.hasMany(Request, {foreignKey: "uid", onDelete: 'CASCADE'});
 Request.belongsTo(User, {foreignKey: "uid", onDelete: 'CASCADE'});
 
+//*Un usuario puede hacer varios comentarios, y cada comentario pertenece solo a un usuario N:1
+User.hasMany(Message, {foreignKey: 'uid'});
+Message.belongsTo(User, {foreignKey: 'uid'});
 
+//*Varios usuarios y productos pueden tener varias reviews N:N
+User.hasMany(Product, {foreignKey: 'uid'});
+Product.hasMany(User, {foreignKey: 'id_product'});
 
-
+//*Cada review pertenece a un solo usuario y un solo producto 1:1
+Review.belongsTo(User, {foreignKey: 'uid'});
+Review.belongsTo(Product, {foreignKey: 'id_product'});
 
 
 
