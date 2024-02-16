@@ -7,6 +7,8 @@ const cartRouter = require("./cart");
 const paymentRouter = require("./payment");
 const requestRouter = require("./request");
 const favoritesRouter = require("./favorites");
+const typeRouter = require("./type");
+const messageRouter = require("./message");
 
 const mainRouter = Router();
 
@@ -17,5 +19,7 @@ mainRouter.use('/cart', cartRouter);
 mainRouter.use('/payment', paymentRouter);
 mainRouter.use('/request', requestRouter);
 mainRouter.use('/favorites', favoritesRouter);
+mainRouter.use('/type', typeRouter);
+mainRouter.use('/message', messageRouter);
 
 module.exports = mainRouter;

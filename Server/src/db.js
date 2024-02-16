@@ -7,6 +7,7 @@ const paymentModel = require("./models/payment");
 const requestModel = require("./models/request");
 const reviewModel = require("./models/review");
 const messageModel = require("./models/message");
+const typeModel = require("./models/type");
 
 
 require('dotenv').config();
@@ -33,11 +34,12 @@ paymentModel(dataBase);
 requestModel(dataBase);
 reviewModel(dataBase);
 messageModel(dataBase);
+typeModel(dataBase);
 
 
 // Relaciones
 
-const { Product, User, Cart, Category, Payment, Request, Review, Message } = dataBase.models;
+const { Product, User, Cart, Category, Payment, Request, Review, Message, Type } = dataBase.models;
 
 //*un producto puede tener una categoria y una categoria puede tener varios productos 1:N
 Category.hasMany(Product, { foreignKey: 'id_category' });
@@ -82,6 +84,10 @@ Product.hasMany(User, {foreignKey: 'id_product'});
 //*Cada review pertenece a un solo usuario y un solo producto 1:1
 Review.belongsTo(User, {foreignKey: 'uid'});
 Review.belongsTo(Product, {foreignKey: 'id_product'});
+
+//*un producto puede tener un tipo y un tipo puede tener varios productos
+Type.hasMany(Product, {foreignKey: "id_type"});
+Product.belongsTo(User, {foreignKey: 'id_type'});
 
 
 
