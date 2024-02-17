@@ -9,6 +9,7 @@ const requestRouter = require("./request");
 const favoritesRouter = require("./favorites");
 const typeRouter = require("./type");
 const messageRouter = require("./message");
+const reviewRouter = require("./review");
 
 const mainRouter = Router();
 
@@ -21,5 +22,6 @@ mainRouter.use('/request', requestRouter);
 mainRouter.use('/favorites', favoritesRouter);
 mainRouter.use('/type', typeRouter);
 mainRouter.use('/message', messageRouter);
+mainRouter.use('/review', reviewRouter);
 
 module.exports = mainRouter;

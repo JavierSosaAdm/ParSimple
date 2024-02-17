@@ -9,7 +9,6 @@ const categories = [
 ]
 const fetchCategory = async () => {
 
-
     try {
         for (const category of categories) {
             const existingCategory = await Category.findOne({
@@ -28,4 +27,4 @@ const fetchCategory = async () => {
     }
 };
 
-module.exports = { fetchCategory };
+module.exports =  fetchCategory ;
