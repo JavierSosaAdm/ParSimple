@@ -1,23 +1,16 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (dataBase) => {
-    dataBase.define('Message', {
-        id_message: {
+    dataBase.define('Type', {
+        id_type: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        userName: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        text: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        timestamp: {
-            type: DataTypes.DATE,
-            allowNull: true
+            allowNull: false,
+            unique: true
         }
     },
     {

@@ -1,14 +1,13 @@
 const { Category } = require("../db");
 
+const categories = [
+    {name: 'Todas'},
+    {name: 'Classic'},
+    {name: 'Grey'},
+    {name: 'Black'},
+    {name: 'Blue'},
+]
 const fetchCategory = async () => {
-
-    const categories = [
-        {name: 'Todas'},
-        {name: 'Classic'},
-        {name: 'Grey'},
-        {name: 'Black'},
-        {name: 'Blue'},
-    ]
 
     try {
         for (const category of categories) {
@@ -28,4 +27,4 @@ const fetchCategory = async () => {
     }
 };
 
-module.exports = { fetchCategory };
+module.exports =  fetchCategory ;
