@@ -8,7 +8,7 @@ const fetchTypes = async () => {
 
     try {
 
-        for (let type in types) {
+        for (const type of types) {
             const typeName = await Type.findOne({
                 where: {
                     name: type.name

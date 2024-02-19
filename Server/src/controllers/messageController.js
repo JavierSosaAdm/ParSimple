@@ -5,7 +5,7 @@ const getMessageController = async () => {
     return messages;
 };
 
-const sendMessageController = async (uid, message) => {
+const sendMessageController = async (message) => {
     
         const newMessage = await Message.create(message)
         return newMessage;

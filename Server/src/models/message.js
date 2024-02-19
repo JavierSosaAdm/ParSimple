@@ -17,7 +17,7 @@ module.exports = (dataBase) => {
         },
         timestamp: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         }
     },
     {
