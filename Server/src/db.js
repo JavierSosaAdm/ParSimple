@@ -9,7 +9,6 @@ const reviewModel = require("./models/review");
 const messageModel = require("./models/message");
 const typeModel = require("./models/type");
 
-
 require('dotenv').config();
 
 const {
