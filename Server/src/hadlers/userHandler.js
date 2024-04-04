@@ -1,7 +1,7 @@
 
 const {
     getAllUserController,
-    // getUserNameController,
+    getUserNameController,
     userIDController,
     putUserController,
     deleteUserController,
@@ -19,13 +19,17 @@ const getAllUser = async (req, res) => {
     }
 };
 
-// const getUserByName = async () => {
-//     try {
+const getUserByName = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        const userName = await getUserNameController(name);
+        res.status(200).json(userName);
         
-//     } catch (error) {
-//         return res.status(400).json({error: error.message});
-//     }
-// };
+    } catch (error) {
+        res.status(400).json({error: error.message});
+    }
+};
 
 //!HANDLER QUE MANEJA LA PETICION GET A /USERS/:ID PARA TRAER UN USUARIO MEDIANTE UN ID ESPECIFICO
 const getUserByID = async (req, res) => {
@@ -89,14 +93,15 @@ const postUser = async (req, res) => {
             is_Delete: is_Delete
         }
         const newUser = await postUserController(data)
-        return res.status(200).json(newUser);
+        res.status(200).json(newUser);
     } catch (error) {
-        return res.status(400).json({error: error.message});
+        res.status(400).json({error: error.message});
     }
 };
 
 module.exports = {
     getAllUser,
+    getUserByName,
     getUserByID,
     putUser,
     deleteUser,
