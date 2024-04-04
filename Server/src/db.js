@@ -41,6 +41,7 @@ typeModel(dataBase);
 
 const { Product, User, Cart, Category, Payment, Request, Review, Message, Type } = dataBase.models;
 
+
 //*un producto puede tener una categoria y una categoria puede tener varios productos 1:N
 Category.hasMany(Product, { foreignKey: 'id_category' });
 Product.belongsTo(Category, { foreignKey: 'id_category' });
@@ -88,6 +89,7 @@ Review.belongsTo(Product, {foreignKey: 'id_product'});
 //*un producto puede tener un tipo y un tipo puede tener varios productos
 Type.hasMany(Product, {foreignKey: "id_type"});
 Product.belongsTo(User, {foreignKey: 'id_type'});
+
 
 
 
