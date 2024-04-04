@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="container">
+    <form [formGroup]="loginForm" class="row g-3 needs-validation" novalidate (submit)="enviar($event)">
+        <div ass="mb-3">
+          <label for="exampleInputEmail1" class="form-label">E-mail</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="exampleInputEmail1" 
+            formControlName="email"
+            [ngClass]="{'is-valid': hasErrors('email', 'required') || hasErrors('email', 'email')}"
+            >
+            @if (hasErrors('email', 'required')) {
+                <span class="text-danger" id="email">Colocar un e-mail</span>
+            }
+            @if (hasErrors('email', 'email')){
+                <span class="text-danger" id="email">Formato inválido</span>
+            }
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input
+           type="password" 
+           class="form-control" 
+           id="exampleInputPassword1"
+           formControlName="password"
+           [ngClass]="{'is-valid': hasErrors('password', 'required') || hasErrors('password', 'password')}"
+           >
+          @if (hasErrors('password','required')) {
+              <span class="text-danger" id="password">Completar contraseña</span>
+          }
+          @if (hasErrors('password','minlength')) {
+            <span class="text-danger" id="password">Mínimo de 8 caracteres</span>
+          }
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Recordar</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+      </form>
+</div>
