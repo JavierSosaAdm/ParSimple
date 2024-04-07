@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
-const userModel = require("./models/produtc");
-const productModel = require("./models/user");
+const userModel = require("./models/user");
+const productModel = require("./models/produtc");
 const cartModel = require("./models/cart");
 const categoryModel = require("./models/category");
 const paymentModel = require("./models/payment");
@@ -47,8 +47,8 @@ Category.hasMany(Product, { foreignKey: 'id_category' });
 Product.belongsTo(Category, { foreignKey: 'id_category' });
 
 //*Un usuario puede comprar varios productos, y un producto puede ser comprado por varios usuarios N:N
-Product.belongsToMany(User, {through: 'user_product'});
 User.belongsToMany(Product, {through: 'user_product'});
+Product.belongsToMany(User, {through: 'user_product'});
 
 //*Un usuario puede tener varios productos de favoritos, y un producto puede ser favorito de varios usuarios N:N
 User.belongsToMany(Product, {through: 'favorites'});
@@ -79,8 +79,9 @@ User.hasMany(Message, {foreignKey: 'uid'});
 Message.belongsTo(User, {foreignKey: 'uid'});
 
 //*Varios usuarios y productos pueden tener varias reviews N:N
-User.hasMany(Product, {foreignKey: 'uid'});
+
 Product.hasMany(User, {foreignKey: 'id_product'});
+User.hasMany(Product, {foreignKey: 'uid'});
 
 //*Cada review pertenece a un solo usuario y un solo producto 1:1
 Review.belongsTo(User, {foreignKey: 'uid'});
@@ -88,7 +89,7 @@ Review.belongsTo(Product, {foreignKey: 'id_product'});
 
 //*un producto puede tener un tipo y un tipo puede tener varios productos
 Type.hasMany(Product, {foreignKey: "id_type"});
-Product.belongsTo(User, {foreignKey: 'id_type'});
+Product.belongsTo(Type, {foreignKey: 'id_type'});
 
 
 

@@ -8,8 +8,10 @@ const {
 } = require('../controllers/productController')
 
 const getAllProduct = async(req, res) => {
+    const {name, type, minPrice, maxPrice, category, size, is_Delete, order} = req.query;
+
     try {
-        const result = await getAllProductController();
+        const result = await getAllProductController(name, type, minPrice, maxPrice, category, size, is_Delete, order);
         return res.status(200).json(result)
     } catch (error) {
         return res.status(400).json({error: error.message})
@@ -28,8 +30,10 @@ const getProductByID = async(req, res) => {
 };
 
 const getProductByName = async(req, res) => {
+    
+
     try {
-        
+        const producName = await getProductNameController()
     } catch (error) {
         return res.status(400).json({error: error.message})
     }
