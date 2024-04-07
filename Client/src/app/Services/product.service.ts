@@ -25,6 +25,6 @@ export class ProductService {
  }
  
  getProductsByName(name: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseURL}?`)
+    return this.http.get<Product[]>(`${this.baseURL}?name=${name}`);
  }
 }
