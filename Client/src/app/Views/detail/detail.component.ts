@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit  {
   public product?: Product;
   private _route = inject(ActivatedRoute);
   private _ProductService = inject(ProductService)
-  
+
   
   ngOnInit(): void {
     this._route.params.subscribe(params => {
