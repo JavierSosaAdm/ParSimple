@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Input } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
@@ -12,8 +12,9 @@ import { ProductService } from '../../Services/product.service';
   styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit {
+  @Input() product?: Product;
   loading: boolean = true;
-  public product?: Product;
+  // public product?: Product;
   private _route = inject(ActivatedRoute);
   private _ProductService = inject(ProductService)
 

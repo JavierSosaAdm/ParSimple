@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductsComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-
+export class HomeComponent implements OnInit {
+  
+  
+  ngOnInit(): void {
+    
+  }
 }
