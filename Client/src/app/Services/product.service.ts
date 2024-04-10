@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { enviroment } from '../../enviroments/enviroments';
 import { Product } from '../../models/product.model';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,4 +23,10 @@ export class ProductService {
  getProductsByName(name: string): Observable<Product[]> {
     return this._http.get<Product[]>(`${this.baseURL}/products?name=${name}`);
  }
+
+ postProduct(data: Product): Observable<Product> {
+   console.log(data);
+    return this._http.post<Product>(`${this.baseURL}/products`, data);
+ }
+ 
 }

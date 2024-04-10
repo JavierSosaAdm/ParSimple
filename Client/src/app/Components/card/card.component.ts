@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
   
   ngOnInit(): void {
     this._route.params.subscribe(params => {
-      this._ProductService.getProductsById(params['id']).subscribe((data: Product) => {
+      this._ProductService.getProductsById(params['id_product']).subscribe((data: Product) => {
         console.log(data);
         this.product = data;
         this.loading = false;
