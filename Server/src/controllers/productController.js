@@ -2,7 +2,7 @@ const { Op, where } = require("sequelize");
 const { Product, Category, User, Type } = require('../db');
 
 
-const getAllProductController = async (name, type, minPrice, maxPrice, category, size, is_Delete, order) => {
+const getAllProductController = async (name, type, minPrice, maxPrice, category, size, is_Delete, order) => { // funciona
     console.log(name, type, minPrice, maxPrice, category, size, is_Delete, order);
     
     let whereClause = {};
@@ -74,72 +74,6 @@ const getAllProductController = async (name, type, minPrice, maxPrice, category,
     return allProduct;
 }
 
-// const getAllProductController = async (name, type, minPrice, maxPrice, category, size, is_Delete, order) => { //Funciona
-    
-//     console.log(name, type, minPrice, maxPrice, category, size, is_Delete, order);
-
-//     const whereClause={}
-
-//     if(name) {
-//         whereClause.name = {
-//             [Op.iLike]: `${name}`
-//         }
-//     }
-
-
-//     if (minPrice && maxPrice) {
-//         whereClause.price = {
-//             [Op.between]: [minPrice, maxPrice]
-//         } 
-//     } else if (minPrice) {
-//         whereClause.price = {
-//             [Op.gte]: minPrice
-//         }       
-//     } else if (maxPrice) {
-//         whereClause.price = {
-//             [Op.Ite]: maxPrice
-//         }
-//     }
-
-//     let orderBy = [];
-
-//     if (order === 'name_ASC') {
-//         orderBy = [['name', 'ASC']]
-//     } else if (order === 'name_DESC') {
-//         orderBy = [['name', 'DESC']]
-//     } else if (order === 'price_ASC') {
-//         orderBy = [['price', 'ASC']]
-//     } else if (order === 'price_DESC') {
-//         orderBy = [['price', 'DESC']]
-//     }
-
-//     if(Object.keys(whereClause).length === 0){
-//         const response = await Product.findAll({
-//             order: orderBy.length > 0 ? orderBy : undefined,
-//             include: [{
-//                 model: User,
-//                 through: 'user_product' // Asegúrate de especificar el nombre correcto de la tabla intermedia
-//             }]
-//         })
-//         return response
-//     } else {
-//         const response = await Product.findAll({
-//             where: whereClause,
-//             order: orderBy.length > 0 ? orderBy : undefined,
-//             include: [{
-//                 model: User,
-//                 through: 'user_product' // Asegúrate de especificar el nombre correcto de la tabla intermedia
-//             }]
-            
-//         })
-//         return response
-//     }
-// };
-
-
-
-const getProductNameController = async () => {};
-
 const getProductByIDController = async (id) => { //funcona
     const productID = await Product.findByPk(id);
     return productID;
@@ -201,7 +135,6 @@ const postProductController = async (data) => { //funciona
 
 module.exports = {
     getAllProductController,
-    getProductNameController,
     getProductByIDController,
     putProductController,
     deleteProductController,
