@@ -1,1 +1,76 @@
-<p>products works!</p>
+<div>
+    <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="registrar($event)" >
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="name" 
+            formControlName="name"
+            aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="price"
+              formControlName="price" 
+              aria-describedby="emailHelp">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="size">Talle</label>
+            <select class="form-select" id="size" formControlName="size">
+              <option selected>Elegir...</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="category">Categoría</label>
+            <select class="form-select" id="category" formControlName="category">
+              <option selected>Elegir...</option>
+              <option value="Todas">Todas</option>
+              <option value="Classic">Classic</option>
+              <option value="Grey">Grey</option>
+              <option value="Black">Black</option>
+              <option value="Blue">Blue</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="type">Tipo de calzado</label>
+            <select class="form-select" id="type" formControlName="type">
+              <option selected>Elegir...</option>
+              <option value="Zapatos">Zapatos</option>
+              <option value="Sandalias">Sandalias</option>
+              <option value="Ojotas">Ojotas</option>
+              <option value="Zapatillas">Zapatillas</option>
+              <option value="Borcegos">Borcegos</option>
+              <option value="Botas">Botas</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="image">
+            <label class="input-group-text" for="image" formControlName="image">Subir</label>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="description" 
+              formControlName="description"
+              aria-describedby="emailHelp">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+</div>

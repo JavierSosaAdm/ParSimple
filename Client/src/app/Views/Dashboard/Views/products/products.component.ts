@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../../Services/product.service';
 import { CommonModule, NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../../../../Services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -15,24 +15,26 @@ export class ProductComponent implements OnInit {
 
   constructor(private FormBuilder: FormBuilder){
     this.data = this.FormBuilder.group({
-      id_product: [],
-      name: [],
-      price: [],
-      size: [],
-      description: [],
-      rating: [],
-      reviewsCount: [],
-      category: [],
-      type: [],
-      stock_quantity: [],
-      is_Delete: [],
-      image: []
+      id_product: ['', []],
+      name: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      size: ['', [Validators.required]],
+      description: ['', []],
+      rating: ['', []],
+      reviewsCount: ['', []],
+      category: ['', [Validators.required]],
+      type: ['', [Validators.required]],
+      stock_quantity: ['', []],
+      is_Delete: ['', []],
+      image: ['', []]
     })
   }
 
   registrar(event: Event){
     event.preventDefault();
     console.log(this.data.value);
+    console.log('esto es ' + this.data);
+    
     
   }
   ngOnInit(): void {
