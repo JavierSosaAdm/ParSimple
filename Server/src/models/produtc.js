@@ -10,7 +10,7 @@ module.exports = (dataBase) => {
             },
             type: {
                 type: DataTypes.STRING,
-                allowNull: true,
+                allowNull: false,
             },
             image: {
                 type: DataTypes.STRING,
@@ -18,15 +18,15 @@ module.exports = (dataBase) => {
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: true
+                allowNull: false
             },
             price: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull: false
             },
             description: {
                 type: DataTypes.TEXT,
-                allowNull: false,
+                allowNull: true
             },
             size: {
                 type: DataTypes.STRING,
