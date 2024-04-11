@@ -102,7 +102,7 @@ const deleteProductController = async (id) => { // funciona
 };
 
 const postProductController = async (data) => { //funciona
-    
+    console.log(data);
    try {
     const [product, newProduct] = await Product.findOrCreate({
         

@@ -1,7 +1,8 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../../../Services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -12,20 +13,22 @@ import { ProductService } from '../../../../Services/product.service';
 })
 export class ProductComponent implements OnInit {
   data!: FormGroup;
+  private _ProductService = inject(ProductService);
+  private _router = inject(Router);
 
   constructor(private FormBuilder: FormBuilder){
     this.data = this.FormBuilder.group({
-      id_product: ['', []],
+      // id_product: ['', []],
       name: ['', [Validators.required]],
-      price: ['', [Validators.required]],
+      price: [, [Validators.required]],
       size: ['', [Validators.required]],
       description: ['', []],
-      rating: ['', []],
-      reviewsCount: ['', []],
+      rating: [, []],
+      reviewsCount: [, []],
       category: ['', [Validators.required]],
       type: ['', [Validators.required]],
-      stock_quantity: ['', []],
-      is_Delete: ['', []],
+      stock_quantity: [, []],
+      is_Delete: [, []],
       image: ['', []]
     })
   }
@@ -33,9 +36,7 @@ export class ProductComponent implements OnInit {
   registrar(event: Event){
     event.preventDefault();
     console.log(this.data.value);
-    console.log('esto es ' + this.data);
-    
-    
+    this._ProductService.postProduct(this.data.value).subscribe();
   }
   ngOnInit(): void {
     console.log('esto es el formulario de creacion de prodctos');
