@@ -13,6 +13,15 @@ import { OrdersComponent } from '../Views/Dashboard/Views/orders/orders.componen
 import { PaymentsComponent } from '../Views/Dashboard/Views/payments/payments.component';
 import { ProductComponent } from '../Views/Dashboard/Views/products/products.component';
 import { AppComponent } from '../app.component';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment2 } from '../../enviroments/enviroments';
+import { BrowserModule } from '@angular/platform-browser';
+
+
+
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     ProductsComponent,
@@ -31,7 +40,8 @@ import { AppComponent } from '../app.component';
     CommonModule,
     NgModule,
     FormsModule,
-
+    provideFirebaseApp(() => initializeApp()),
+    provideFirestore(() => getFirestore()),
   ],
   exports: [
     ProductsComponent,
