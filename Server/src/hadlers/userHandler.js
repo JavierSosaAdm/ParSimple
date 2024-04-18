@@ -92,6 +92,7 @@ const postUser = async (req, res) => {
             is_Admin: false,
             is_Delete: is_Delete
         }
+        
         const newUser = await postUserController(data)
         res.status(200).json(newUser);
     } catch (error) {

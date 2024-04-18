@@ -8,7 +8,7 @@ export interface User {
     phone:        string;
     image:        string;
     is_Admin:     boolean;
-    is_Delete:    null;
+    is_Delete:    boolean;
     isBlocked:    boolean;
     payment_code: null;
     id_product:   null;

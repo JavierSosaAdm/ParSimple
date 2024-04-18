@@ -29,7 +29,7 @@ module.exports = (dataBase) => {
                 allowNull: false
             },
             phone: {
-                type: DataTypes.NUMERIC,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             image: {
