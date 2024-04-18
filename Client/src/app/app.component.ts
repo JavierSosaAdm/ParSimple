@@ -1,6 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -10,10 +13,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Client';
+  title = 'client';
   menuSelected: string = '';
 
+  
   onOption(nemuOption: string) {
     this.menuSelected = nemuOption;
+    
   }
 }

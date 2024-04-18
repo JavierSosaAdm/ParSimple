@@ -1,16 +1,19 @@
 import { CommonModule, NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthComponent } from '../../../auth/auth.component';
+import { User } from '../../../models/user.model';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, CommonModule],
+  imports: [ReactiveFormsModule, NgClass, CommonModule, AuthComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-
+  firebaseService = inject(AuthService);
   loginForm!: FormGroup;
 
   constructor(private FormBuilder: FormBuilder) {
@@ -20,8 +23,14 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  enviar(event: Event){
-    event.preventDefault();
+  async enviar(event: Event){
+    if(this.loginForm.valid) {
+      event.preventDefault();
+      this.firebaseService.singIn(this.loginForm.value as User)
+      .then(resp => {
+        console.log('___', resp);
+      })
+    }
     console.log(this.loginForm.value);
   }
   ngOnInit(): void {

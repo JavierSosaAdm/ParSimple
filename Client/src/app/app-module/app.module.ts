@@ -13,14 +13,15 @@ import { OrdersComponent } from '../Views/Dashboard/Views/orders/orders.componen
 import { PaymentsComponent } from '../Views/Dashboard/Views/payments/payments.component';
 import { ProductComponent } from '../Views/Dashboard/Views/products/products.component';
 import { AppComponent } from '../app.component';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { environment2 } from '../../enviroments/enviroments';
-import { BrowserModule } from '@angular/platform-browser';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../../../environment.prod';
+// import { provideFirebaseApp, getApp } from '@angular/fire/app';
+// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+// import { BrowserModule } from '@angular/platform-browser';
 
 
 
-// import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -40,8 +41,10 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     NgModule,
     FormsModule,
-    provideFirebaseApp(() => initializeApp()),
-    provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
+    // provideFirebaseApp(() => initializeApp()),
+    // provideFirestore(() => getFirestore()),
   ],
   exports: [
     ProductsComponent,
@@ -54,7 +57,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ClientsComponent,
     OrdersComponent,
     PaymentsComponent,
-    ProductComponent
+    ProductComponent,
+    
   ],
   bootstrap: [AppComponent],
   providers: []
