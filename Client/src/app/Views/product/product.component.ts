@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
   ProductList: Product[] = [];
   searchName: string = '';
   
+  
 
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
@@ -28,11 +29,15 @@ export class ProductsComponent implements OnInit {
     this._ProductService.getProducts().subscribe((data: Product[]) => {
       this.ProductList = data  
       
-      console.log(this.ProductList);
+      // console.log(this.ProductList);
     });  
   }
-  navegate(id: string): void {
-    this._router.navigate(['/products', id]);
+  navegate(product: Product): void {
+    if (product && product.id_product) {
+      this._router.navigate(['/detail', product.id_product])
+    } else {
+      console.error('Producto inválido o ID faltante');
+    }
   }
   
   searchProduct(): void {

@@ -15,10 +15,8 @@ import { ProductComponent } from '../Views/Dashboard/Views/products/products.com
 import { AppComponent } from '../app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { environment } from '../../../environment.prod';
-// import { provideFirebaseApp, getApp } from '@angular/fire/app';
-// import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-// import { BrowserModule } from '@angular/platform-browser';
+import { enviroment } from '../../../enviroment.prod';
+
 
 
 
@@ -41,10 +39,9 @@ import { environment } from '../../../environment.prod';
     CommonModule,
     NgModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule
-    // provideFirebaseApp(() => initializeApp()),
-    // provideFirestore(() => getFirestore()),
+ 
   ],
   exports: [
     ProductsComponent,

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Product } from '../../models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 @Component({
   selector: 'app-detail',
@@ -18,13 +18,15 @@ export class DetailComponent implements OnInit  {
 
   
   ngOnInit(): void {
-    this._route.params.subscribe(params => {
-      this._ProductService.getProductsById(params['id']).subscribe((data: Product) => {
-        console.log(data);
-        this.product = data;
-        this.loading = false;
-        
+   
+      this._route.params.subscribe(params => {
+        this._ProductService.getProductsById(params['id']).subscribe((data: Product) => {
+          // console.log(data);
+          this.product = data;
+          this.loading = false;
+          
+        })
       })
-    })
+    
   }
 }
