@@ -4,10 +4,11 @@ import { Observable, finalize, from, map, throwError } from 'rxjs';
 import { Product } from '../models/product.model';
 import { enviroment } from '../../../enviroment.prod';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { v4 as uuidV4 } from 'uuid';
 import { catchError } from 'rxjs';
 import { DocumentReference } from 'firebase/firestore';
+
 
 
 @Injectable({
@@ -15,13 +16,26 @@ import { DocumentReference } from 'firebase/firestore';
 })
 export class FireService {
 
+  
   private storage: AngularFireStorage;
   private firestore: AngularFirestore;
+  private productCollection: AngularFirestoreCollection<Product>;
+  products: Observable<Product[]>;
 
-  constructor(storage: AngularFireStorage, firestore: AngularFirestore) {
+  constructor(storage: AngularFireStorage, firestore: AngularFirestore ) {
     this.storage = storage;
     this.firestore = firestore;
+    this.productCollection = firestore.collection<Product>('products');
+    this.products = this.productCollection.valueChanges();
   }
+
+  getProductsFire(): Observable<Product[]> {
+    return this.products;
+  }
+
+  // getProductByName(name: string): Observable<Product[]> {
+  //   return 
+  // }
   upImageProd(image: File): Observable<any> {
     
       const filePath = `productos/${this.generateUniqueFilename(image.name)}`;

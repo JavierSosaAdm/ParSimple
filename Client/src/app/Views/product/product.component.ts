@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
+import { FireService } from '../../Services/fire.service';
 import { Product } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { CardComponent } from '../../Components/card/card.component'
 import { FormsModule } from '@angular/forms';
+import { CardsComponent } from '../../Components/cards/cards.component';
+
 
 
 
@@ -21,17 +24,18 @@ export class ProductsComponent implements OnInit {
   searchName: string = '';
   
   
-
+  private _fireService = inject(FireService)
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
-
+  
+  
   ngOnInit(): void {
-    this._ProductService.getProducts().subscribe((data: Product[]) => {
-      this.ProductList = data  
-      
-      // console.log(this.ProductList);
+    this._fireService.getProductsFire().subscribe((data) => {
+      this.ProductList = [...data]
+      console.log(this.ProductList);  
     });  
   }
+  
   navegate(product: Product): void {
     if (product && product.id_product) {
       this._router.navigate(['/detail', product.id_product])
@@ -48,3 +52,8 @@ export class ProductsComponent implements OnInit {
   }
   
 }
+
+// this._ProductService.getProducts().subscribe((data: Product[]) => {
+//   this.ProductList = data  
+//   console.log(this.ProductList);
+// })

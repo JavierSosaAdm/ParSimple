@@ -16,9 +16,9 @@ import { AppComponent } from '../app.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { enviroment } from '../../../enviroment.prod';
-
-
-
+import { FireService } from '../Services/fire.service';
+import { ProductService } from '../Services/product.service';
+import { UserService } from '../Services/user.service';
 
 
 @NgModule({
@@ -58,6 +58,6 @@ import { enviroment } from '../../../enviroment.prod';
     
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [FireService, ProductService, UserService]
 })
 export class AppModuleModule { }
