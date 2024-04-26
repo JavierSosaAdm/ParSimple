@@ -1,12 +1,12 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-          <img src="{{product?.image}}" alt="{{product?.name}}">
-          <h5 class="card-title">{{product?.name}}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">${{product?.price}}</h6>
-          <p href="#" class="card-link">Categoría: {{product?.category}}</p>
-          <p href="#" class="card-link">Talle: {{product?.size}}</p>
-          <p>Puntaje: {{product?.rating}}</p>
+          <img src="{{product?.data?.image}}" alt="{{product?.data?.name}}">
+          <h5 class="card-title">{{product?.data?.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">${{product?.data?.price}}</h6>
+          <p href="#" class="card-link">Categoría: {{product?.data?.category}}</p>
+          <p href="#" class="card-link">Talle: {{product?.data?.size}}</p>
+          <p>Puntaje: {{product?.data?.rating}}</p>
           <button routerLink="products/:id" [ngClass]="{active: menuSelected == 'products/:id'}" (click)="verDetail()">Ver Dertalle</button>
         </div>
     </div>

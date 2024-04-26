@@ -1,12 +1,12 @@
 <div class="container">
-    <input type="text" [(ngModel)]= "searchName" (input)="searchProduct()" placeholder="Buscar producto por nombre">
+    <input type="text" [(ngModel)]= "searchName"  placeholder="Buscar producto por nombre">
     
     @if(ProductList.length === 0) {
             <h2>No se encontraron Productos con ese nombre</h2>
     }
     @if(ProductList.length > 0) {
-        @for(product of ProductList; track product.id_product) {
-            <app-card [product]="product"/>
+        @for(product of ProductList; track product.id) {
+            <app-card *ngFor="let product of ProductList" [product]="product"/>
         }
     }
     

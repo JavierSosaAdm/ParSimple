@@ -20,7 +20,7 @@ import { CardsComponent } from '../../Components/cards/cards.component';
   styleUrl: './product.component.css'
 })
 export class ProductsComponent implements OnInit {
-  ProductList: Product[] = [];
+  ProductList: { id: string, data: Product }[] = [];
   searchName: string = '';
   
   
@@ -31,25 +31,27 @@ export class ProductsComponent implements OnInit {
   
   ngOnInit(): void {
     this._fireService.getProductsFire().subscribe((data) => {
-      this.ProductList = [...data]
+      this.ProductList = data
       console.log(this.ProductList);  
     });  
   }
   
-  navegate(product: Product): void {
-    if (product && product.id_product) {
-      this._router.navigate(['/detail', product.id_product])
+  navegate(product: { id: string, data: Product }): void {
+    if (product) {
+      this._router.navigate(['/detail', product.id])
+      // console.log();
+      
     } else {
       console.error('Producto inválido o ID faltante');
     }
   }
   
-  searchProduct(): void {
-    this._ProductService.getProductsByName(this.searchName).subscribe((data: Product[]) => {
-      this.ProductList = data;
+  // searchProduct(): void {
+  //   this._ProductService.getProductsByName(this.searchName).subscribe((data: Product[]) => {
+  //     this.ProductList = data;
       
-    })
-  }
+  //   })
+  // }
   
 }
 
