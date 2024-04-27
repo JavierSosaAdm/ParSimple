@@ -4,14 +4,10 @@ import { Observable, finalize, from, map, throwError } from 'rxjs';
 import { Product } from '../models/product.model';
 import { enviroment } from '../../../enviroment.prod';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentData, DocumentReference } from '@angular/fire/compat/firestore';
 import { v4 as uuidV4 } from 'uuid';
 import { catchError } from 'rxjs';
-import { DocumentReference, DocumentSnapshot, doc } from 'firebase/firestore';
-import { docSnapshots } from '@angular/fire/firestore';
-
-
-
+import { doc } from 'firebase/firestore';
 
 
 @Injectable({
@@ -19,7 +15,6 @@ import { docSnapshots } from '@angular/fire/firestore';
 })
 export class FireService {
 
-  
   private storage: AngularFireStorage;
   private firestore: AngularFirestore;
   private productCollection: AngularFirestoreCollection<Product>;
@@ -71,7 +66,7 @@ export class FireService {
  
   private generateUniqueFilename(filename: string): string {
     const extention = filename.split('.').pop();
-    return `<span class="math-inline">\{uuidv4\(\)\}\.</span>{extension}`
+    return `${uuidV4()}.${extention}`;
   }
   
   getProductByIdFire(productId: string): Observable<Product | undefined> {
@@ -82,5 +77,18 @@ export class FireService {
     );
   }
   
+  postProductFire(product: Product): Observable<void> {
+    return from(this.firestore.collection('products').doc(product.id_product || uuidV4()).set(product));
+  }
+  // postProductFire(product: Product): Promise<void> {
+  //   try {
+  //     product.id_product = product.id_product || uuidV4();
+  //     const productRef = this.firestore.collection('products').doc(product.id_product || uuidV4());
+  //     return productRef.set(product); // Use productRef here
+  //   } catch (error) {
+  //     console.error('Error al agregar producto:', error);
+  //     return Promise.reject(error);
+  //   }
+  // }
 }
 

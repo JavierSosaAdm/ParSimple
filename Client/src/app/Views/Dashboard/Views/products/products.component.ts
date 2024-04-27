@@ -18,7 +18,8 @@ export class ProductComponent implements OnInit {
   data!: FormGroup;
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
-
+  private _fireService = inject(FireService);
+  
   constructor(private FormBuilder: FormBuilder, private fireService: FireService) {
     this.data = this.FormBuilder.group({
       // id_product: ['', []],
@@ -55,7 +56,7 @@ export class ProductComponent implements OnInit {
           uploadObservable.subscribe({
             next: (downloadURL: string) => {
               dataForm.image = downloadURL;
-              this._ProductService.postProduct(dataForm).subscribe({
+              this._fireService.postProductFire(dataForm).subscribe({
                 next: (response) => {
                   console.log('Producto registrado exitosamente!', response);
                 },
@@ -71,13 +72,9 @@ export class ProductComponent implements OnInit {
         })
       ).subscribe();
     } else {
-      this._ProductService.postProduct(dataForm).subscribe({
-        next: (response) => {
-          console.log('Producto registrado exitosamente!', response);
-        },
-        error: (error) => {
-          console.error('Error al registrar el producto:', error);
-        }
+      this._fireService.postProductFire(dataForm).subscribe({
+        next: () => console.log('Producto registrado exitosamente!'),
+        error: (error) => console.error('Error al registrar el producto:', error)
       });
     }
     this.data.reset();
