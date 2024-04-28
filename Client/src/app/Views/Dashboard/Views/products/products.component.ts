@@ -1,4 +1,3 @@
-
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -33,13 +32,12 @@ export class ProductComponent implements OnInit {
       type: ['', [Validators.required]],
       stock_quantity: [, []],
       is_Delete: [, []],
-      image: [, []]
+      image: ['', []]
     });
   }
 
   register(event: Event) {
     event.preventDefault();
-
     if (this.data.invalid) {
       return;
     }
@@ -56,6 +54,7 @@ export class ProductComponent implements OnInit {
           uploadObservable.subscribe({
             next: (downloadURL: string) => {
               dataForm.image = downloadURL;
+              
               this._fireService.postProductFire(dataForm).subscribe({
                 next: (response) => {
                   console.log('Producto registrado exitosamente!', response);
@@ -72,6 +71,7 @@ export class ProductComponent implements OnInit {
         })
       ).subscribe();
     } else {
+      
       this._fireService.postProductFire(dataForm).subscribe({
         next: () => console.log('Producto registrado exitosamente!'),
         error: (error) => console.error('Error al registrar el producto:', error)
