@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../Services/user.service';
+import { AuthService } from '../../../auth/auth.service';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { UserService } from '../../../Services/user.service';
 export class FormUserComponent implements OnInit {
   data!: FormGroup;
   private _UserService = inject(UserService);
+  private _auth = inject(AuthService);
+  private _router = inject(Router);
 
   constructor(private FormBuilder: FormBuilder) {
     this.data = this.FormBuilder.group({
@@ -33,10 +36,20 @@ export class FormUserComponent implements OnInit {
     })
   }
   
-  register(event: Event) {
+  async register(event: Event) {
     event.preventDefault();
+    const { email, password } = this.data.value;
+    
+    try {
+      const userCredential = await this._auth.createUserWithEmailAndPassword(email, password);
+      console.log('Usuario creado exitosamente:', userCredential);
+      this._UserService.postUserFire(this.data.value).subscribe()
+      
+    } catch (error) {
+        console.error('Error al crear usuario:', error);
+    }
     console.log(this.data.value);
-    this._UserService.postUser(this.data.value).subscribe()
+    this._router.navigate(['/']); // redirección a home page
   }
   ngOnInit(): void {
     console.log('esto es el formulario de registro de usuarios');

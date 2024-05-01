@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, finalize, from, map, throwError } from 'rxjs';
+import { Observable, finalize, from, map, switchMap, throwError } from 'rxjs';
 import { Product } from '../models/product.model';
 import { enviroment } from '../../../enviroment.prod';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -45,44 +45,21 @@ export class FireService {
   // getProductByName(name: string): Observable<Product[]> {
   //   return 
   // }
-  // upImageProd(image: File): Observable<any> {
-    
-  //     const filePath = `productos/${this.generateUniqueFileName(image.name)}`;
-  //     const imgRef = this.storage.ref(filePath);
   
-  //     return imgRef.put(image).snapshotChanges().pipe(
-  //       map(snapshot => ({ 
-  //         progress: (snapshot?.bytesTransferred / snapshot?.totalBytes) * 100 || 0
-  //       })
-  //       ),catchError(error => {
-  //             console.log('Error al subir imagen:', error);
-  //             return throwError('Error al subir imagen, intertelo nuevamente');
-  //           }),
-  //         finalize(() => imgRef.getDownloadURL())
-  //         );
-  // }
-  upImageProd(image: File): Observable<any> {
+  upImageProd(image: File): Observable<string> {
     console.log('esto es imagen:', image);
     if (!image) {
       return throwError('No se seleccionó ninguna imagen.');  // Manejar caso sin imagen
     }
-    console.log('AQUI EL NOMBRE DE LA IMAGEN: --->', image.name);
+    // console.log('AQUI EL NOMBRE DE LA IMAGEN: --->', image.name);
     const filename: string = image.name;
     const filePath = `products/${this.generateUniqueFileName(filename)}`;
     
     const imgRef = this.storage.ref(filePath);
   
-    return imgRef.put(image).snapshotChanges().pipe(
-      map(snapshot => {
-        if (snapshot) {
-          const progress = (snapshot.bytesTransferred as number) / (snapshot.totalBytes as number) * 100;
-          return { progress };
-        } else {
-          // Maneja el caso donde snapshot es indefinido (opcional)
-          return { progress: 0 };  // O otro valor predeterminado
-        }
-      }),
-      finalize(() => imgRef.getDownloadURL())
+    return from(imgRef.put(image)).pipe(
+      switchMap(() => imgRef.getDownloadURL())
+      
     );
   }
   
@@ -95,7 +72,7 @@ export class FireService {
     const parts = filename?.split('.');
     console.log(parts);
     
-    const extention = parts?.length > 1 ? parts.pop() : '';
+    const extention = parts?.length > 1 ? parts[parts.length -1] : '';
     return `${uuidV4()}.${extention}`;
   }
   
@@ -108,15 +85,3 @@ export class FireService {
   }
   
 }
-
-
-// postProductFire(product: Product): Promise<void> {
-//   try {
-//     product.id_product = product.id_product || uuidV4();
-//     const productRef = this.firestore.collection('products').doc(product.id_product || uuidV4());
-//     return productRef.set(product); // Use productRef here
-//   } catch (error) {
-//     console.error('Error al agregar producto:', error);
-//     return Promise.reject(error);
-//   }
-// }

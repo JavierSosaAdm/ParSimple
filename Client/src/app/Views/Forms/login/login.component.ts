@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AuthComponent } from '../../../auth/auth.component';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   firebaseService = inject(AuthService);
+  private _router = inject(Router);
   loginForm!: FormGroup;
 
   constructor(private FormBuilder: FormBuilder) {
@@ -29,9 +31,14 @@ export class LoginComponent implements OnInit {
       this.firebaseService.singIn(this.loginForm.value as User)
       .then(resp => {
         console.log('___', resp);
+        this._router.navigate(['/']); // redirección a home page
+      })
+      .catch(error => {
+        console.error(error);
       })
     }
     console.log(this.loginForm.value);
+
   }
   ngOnInit(): void {
     console.log('esto es el login');

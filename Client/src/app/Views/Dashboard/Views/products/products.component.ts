@@ -50,24 +50,28 @@ export class ProductComponent implements OnInit {
       uploadObservable.pipe(
         tap(downloadURL => console.log('Progreso de carga:', downloadURL)),
         finalize(() => {
-          // Manejo de la URL de descarga después de la subida
-          uploadObservable.subscribe({
-            next: (downloadURL: string) => {
-              dataForm.image = downloadURL;
-              
-              this._fireService.postProductFire(dataForm).subscribe({
-                next: (response) => {
-                  console.log('Producto registrado exitosamente!', response);
-                },
-                error: (error) => {
-                  console.error('Error al registrar el producto:', error);
-                }
-              });
-            },
-            error: (error) => {
-              console.error('Error al subir la imagen:', error);
-            }
-          });
+          setTimeout(() => {
+              // Manejo de la URL de descarga después de la subida
+              uploadObservable.subscribe({
+                next: (downloadURL: string) => {
+                dataForm.image = downloadURL;
+                console.log(dataForm.image);
+            
+                this._fireService.postProductFire(dataForm).subscribe({
+                  next: (response) => {
+                    console.log('Producto registrado exitosamente!', dataForm);
+                  },
+                  error: (error) => {
+                    console.error('Error al registrar el producto:', error);
+                  }
+                });
+              },
+              error: (error) => {
+                console.error('Error al subir la imagen:', error); 
+              }
+            });
+
+          }, 5000)
         })
       ).subscribe();
     } else {
