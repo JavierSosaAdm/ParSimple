@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { FireService } from '../../../../Services/fire.service';
 import { finalize, tap } from 'rxjs/operators';
 
+
+
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -18,6 +20,7 @@ export class ProductComponent implements OnInit {
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
   private _fireService = inject(FireService);
+  
   
   constructor(private FormBuilder: FormBuilder, private fireService: FireService) {
     this.data = this.FormBuilder.group({
@@ -50,7 +53,6 @@ export class ProductComponent implements OnInit {
       uploadObservable.pipe(
         tap(downloadURL => console.log('Progreso de carga:', downloadURL)),
         finalize(() => {
-          setTimeout(() => {
               // Manejo de la URL de descarga después de la subida
               uploadObservable.subscribe({
                 next: (downloadURL: string) => {
@@ -60,6 +62,7 @@ export class ProductComponent implements OnInit {
                 this._fireService.postProductFire(dataForm).subscribe({
                   next: (response) => {
                     console.log('Producto registrado exitosamente!', dataForm);
+                    
                   },
                   error: (error) => {
                     console.error('Error al registrar el producto:', error);
@@ -70,8 +73,6 @@ export class ProductComponent implements OnInit {
                 console.error('Error al subir la imagen:', error); 
               }
             });
-
-          }, 5000)
         })
       ).subscribe();
     } else {

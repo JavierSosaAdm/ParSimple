@@ -19,6 +19,9 @@ import { enviroment } from '../../../enviroment.prod';
 import { FireService } from '../Services/fire.service';
 import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
+import { CloudinaryModule } from '@cloudinary/ng';
+import { cloudinaryConfig } from '../../../cloudinary.config';
+
 
 
 @NgModule({
@@ -40,8 +43,8 @@ import { UserService } from '../Services/user.service';
     NgModule,
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
-    AngularFireStorageModule
- 
+    AngularFireStorageModule,
+    CloudinaryModule.forRoot(cloudinaryConfig)
   ],
   exports: [
     ProductsComponent,

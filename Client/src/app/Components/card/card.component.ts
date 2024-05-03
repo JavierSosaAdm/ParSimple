@@ -4,6 +4,9 @@ import { Product } from '../../models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
+import { DomSanitizer } from '@angular/platform-browser';
+
+
 
 @Component({
   selector: 'app-card',
@@ -19,6 +22,7 @@ export class CardComponent implements OnInit {
   private _fireService = inject(FireService)
   private _router = inject(Router);
   private _ProductService = inject(ProductService)
+  public sanitizer = inject(DomSanitizer);
   menuSelected: string = '';
 
   

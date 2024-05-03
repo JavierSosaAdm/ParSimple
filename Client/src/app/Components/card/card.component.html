@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-          <img src="{{product?.data?.image}}" alt="{{product?.data?.name}}">
+          <img [src]="this.sanitizer.bypassSecurityTrustUrl(product?.data?.image ?? '')" alt="{{product?.data?.name ?? 'Producto sin nombre'}}">
           <h5 class="card-title">{{product?.data?.name}}</h5>
           <h6 class="card-subtitle mb-2 text-body-secondary">${{product?.data?.price}}</h6>
           <p href="#" class="card-link">Categoría: {{product?.data?.category}}</p>
