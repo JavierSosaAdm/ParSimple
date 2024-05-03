@@ -39,6 +39,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  selectedFile: File | null = null;
   register(event: Event) {
     event.preventDefault();
     if (this.data.invalid) {
@@ -47,8 +48,8 @@ export class ProductComponent implements OnInit {
 
     const dataForm = this.data.value;
 
-    if (dataForm.image) {
-      const uploadObservable = this.fireService.upImageProd(dataForm.image);
+    if (this.selectedFile) {
+      const uploadObservable = this.fireService.upImageProd(this.selectedFile);
 
       uploadObservable.pipe(
         tap(downloadURL => console.log('Progreso de carga:', downloadURL)),
@@ -89,6 +90,12 @@ export class ProductComponent implements OnInit {
     console.log('esto es el formulario de creacion de prodctos');
   }
 
+  onFileSelected(event: any): void {
+    if (event.target.files.length > 0) {
+    this.selectedFile = event.target.files[0];
+    console.log(this.selectedFile); // Debería mostrar el archivo seleccionado
+    }
+    }
   hasErrors(field: string, typeError: string) {
     return this.data.get(field)?.hasError(typeError) && this.data.get(field)?.touched;
   }

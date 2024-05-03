@@ -59,7 +59,14 @@
             </select>
         </div>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" id="image" formControlName="image" >
+            <input 
+              type="file" 
+              class="form-control" 
+              id="image" 
+              formControlName="image"
+              (change)="onFileSelected($event)"
+              >
+              
             <label class="input-group-text" for="image">Subir</label>
         </div>
         <div class="mb-3">
