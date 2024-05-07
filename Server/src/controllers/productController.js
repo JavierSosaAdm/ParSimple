@@ -1,12 +1,78 @@
-const { Op } = require("sequelize");
-const { Product, Category } = require('../db');
+const { Op, where } = require("sequelize");
+const { Product, Category, User, Type } = require('../db');
 
-const getAllProductController = async () => { //Funciona
-    const allProduct = await Product.findAll();
+
+const getAllProductController = async (name, type, minPrice, maxPrice, category, size, is_Delete, order) => { // funciona
+    console.log(name, type, minPrice, maxPrice, category, size, is_Delete, order);
+    
+    let whereClause = {};
+    
+    if(name) {
+        whereClause.name = {
+            [Op.iLike]: `%${name}%`
+        }
+    }
+
+    if(category) {
+        whereClause.category = category 
+    }
+    if(type) {
+        whereClause.type = type
+    }
+    
+    if(is_Delete) {
+        whereClause.is_Delete = is_Delete
+    }
+    
+    if (size) {
+        whereClause.size = size
+    }
+
+    if (minPrice && maxPrice) {
+        whereClause.price = {
+            [Op.between]: [minPrice, maxPrice]
+        }; 
+    } else if (maxPrice) {
+        if (minPrice) {
+            whereClause.price = {
+                [Op.between]: [minPrice, maxPrice]
+            };
+        } else {
+            whereClause.price = {
+                [Op.lte]: maxPrice
+            };
+        }
+    } else if (minPrice) {
+        whereClause.price = {
+            [Op.gte]: minPrice
+        };
+    }
+        
+    let orderBy = [];
+
+    if (order === 'ASC') {
+        orderBy = [['name', 'ASC']]
+    } else if (order === 'DESC') {
+        orderBy = [['name', 'DESC']]
+    } else if (order === 'priceASC') {
+        orderBy = [['price', 'ASC']]
+    } else if (order === 'priceDESC') {
+        orderBy = [['price', 'DESC']]
+    } else if (orderBy.length === 0) {
+        orderBy.push(['name', 'ASC']);
+    }
+
+    // console.log(where, order);
+    const allProduct = await Product.findAll({
+        where: whereClause,
+        order: orderBy.length > 0 ? orderBy : undefined,
+        include: [{
+            model: User
+        }]
+    });
+    
     return allProduct;
-};
-
-const getProductNameController = async () => {};
+}
 
 const getProductByIDController = async (id) => { //funcona
     const productID = await Product.findByPk(id);
@@ -36,7 +102,7 @@ const deleteProductController = async (id) => { // funciona
 };
 
 const postProductController = async (data) => { //funciona
-    
+    console.log(data);
    try {
     const [product, newProduct] = await Product.findOrCreate({
         
@@ -56,6 +122,7 @@ const postProductController = async (data) => { //funciona
 
             if (category) {
                 newProduct.setCategory(category)          }
+                console.log(newProduct);
             return newProduct;
         }
         return product
@@ -68,7 +135,6 @@ const postProductController = async (data) => { //funciona
 
 module.exports = {
     getAllProductController,
-    getProductNameController,
     getProductByIDController,
     putProductController,
     deleteProductController,

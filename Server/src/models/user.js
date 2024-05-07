@@ -5,15 +5,7 @@ module.exports = (dataBase) => {
         'User', {
             uid: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                primaryKey: true
-            },
-            email: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            password: {
-                type: DataTypes.STRING,
+                primaryKey: true,
                 allowNull: false
             },
             name: {
@@ -28,13 +20,21 @@ module.exports = (dataBase) => {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
             phone: {
-                type: DataTypes.NUMERIC,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             image: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             is_Admin: {
                 type: DataTypes.BOOLEAN,

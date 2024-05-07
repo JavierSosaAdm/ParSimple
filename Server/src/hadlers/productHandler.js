@@ -1,6 +1,5 @@
 const {
     getAllProductController,
-    getProductNameController,
     getProductByIDController,
     putProductController,
     deleteProductController,
@@ -8,8 +7,10 @@ const {
 } = require('../controllers/productController')
 
 const getAllProduct = async(req, res) => {
+    const {name, type, minPrice, maxPrice, category, size, is_Delete, order} = req.query;
+
     try {
-        const result = await getAllProductController();
+        const result = await getAllProductController(name, type, minPrice, maxPrice, category, size, is_Delete, order);
         return res.status(200).json(result)
     } catch (error) {
         return res.status(400).json({error: error.message})
@@ -22,14 +23,6 @@ const getProductByID = async(req, res) => {
     try {
         const producID = await getProductByIDController(id);
         return res.status(200).json(producID)
-    } catch (error) {
-        return res.status(400).json({error: error.message})
-    }
-};
-
-const getProductByName = async(req, res) => {
-    try {
-        
     } catch (error) {
         return res.status(400).json({error: error.message})
     }
@@ -95,7 +88,6 @@ const postProduct = async (req, res) => {
 module.exports = {
     getAllProduct,
     getProductByID,
-    getProductByName,
     putProduct,
     deleteProduct,
     postProduct

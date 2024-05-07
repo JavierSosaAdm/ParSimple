@@ -1,1 +1,102 @@
-<p>form-user works!</p>
+<div clas="container">
+    <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="register($event)" >
+        <div class="mb-3">
+            <label for="uid" class="form-label">Nombre de Usuario</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="uid" 
+              formControlName="uid"
+              aria-describedby="emailHelp"
+              [ngClass]="{'is-valid': hasErrors('uid', 'required')}"
+              >
+              @if (hasErrors('uid', 'required')) {
+                <span class="text-danger">Debe colocar un nombre de usuario.</span>
+              }
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombres</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="name" 
+              formControlName="name"
+              aria-describedby="emailHelp"
+              [ngClass]="{'is-valid': hasErrors('name', 'required')}"
+              >
+              @if (hasErrors('name', 'required')) {
+                <span class="text-danger" >Debe colocar al menos un nombre.</span>
+              }
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="lastName" 
+              formControlName="lastName"
+              aria-describedby="emailHelp"
+              [ngClass]="{'is-valid': hasErrors('lastName', 'required')}"
+              >
+              @if (hasErrors('lastName', 'required')) {
+                <span class="text-danger">Debe colocar un apellido.</span>
+              }
+        </div>
+        <div ass="mb-3">
+          <label for="exampleInputEmail1" class="form-label">E-mail</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="exampleInputEmail1" 
+            formControlName="email"
+            [ngClass]="{'is-valid': hasErrors('email', 'required') || hasErrors('email', 'email')}"
+            >
+            @if (hasErrors('email', 'required')) {
+                <span class="text-danger" id="email">Colocar un e-mail</span>
+            }
+            @if (hasErrors('email', 'email')){
+                <span class="text-danger" id="email">Formato inválido</span>
+            }
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+          <input
+           type="password" 
+           class="form-control" 
+           id="exampleInputPassword1"
+           formControlName="password"
+           [ngClass]="{'is-valid': hasErrors('password', 'required') || hasErrors('password', 'password')}"
+           >
+          @if (hasErrors('password','required')) {
+              <span class="text-danger" id="password">Completar contraseña</span>
+          }
+          @if (hasErrors('password','minlength')) {
+            <span class="text-danger" id="password">Mínimo de 8 caracteres</span>
+          }
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Dirección</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="address" 
+              formControlName="address"
+              aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Teléfono/Celular</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="phone" 
+              formControlName="phone"
+              aria-describedby="emailHelp"
+              [ngClass]="{'is-valid': hasErrors('phone', 'required')}"
+              >
+              @if (hasErrors('phone', 'required')) {
+                <span class="text-danger">Debe colocar un número.</span>
+              }
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+</div>

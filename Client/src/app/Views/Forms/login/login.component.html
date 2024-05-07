@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="loginForm" class="row g-3 needs-validation" novalidate (submit)="enviar($event)">
+    <form class="form" [formGroup]="loginForm" class="row g-3 needs-validation" novalidate (submit)="enviar($event)">
         <div ass="mb-3">
           <label for="exampleInputEmail1" class="form-label">E-mail</label>
           <input 
@@ -36,6 +36,7 @@
           <input type="checkbox" class="form-check-input" id="exampleCheck1">
           <label class="form-check-label" for="exampleCheck1">Recordar</label>
         </div>
+        
         <button type="submit" class="btn btn-primary">Ingresar</button>
       </form>
 </div>

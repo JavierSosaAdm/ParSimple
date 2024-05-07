@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "@angular/common": "^17.3.4"
+  },
+  "devDependencies": {
+   
   }
 }

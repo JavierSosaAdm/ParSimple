@@ -8,21 +8,29 @@ module.exports = (dataBase) => {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
+            type: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
             price: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            size: {
-                type: DataTypes.STRING,
                 allowNull: false
             },
             description: {
                 type: DataTypes.TEXT,
-                allowNull: false,
+                allowNull: true
+            },
+            size: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             rating: {
                 type: DataTypes.INTEGER,
@@ -36,10 +44,6 @@ module.exports = (dataBase) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            type: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
             stock_quantity: {
                 type:DataTypes.INTEGER,
                 allowNull: true
@@ -48,10 +52,6 @@ module.exports = (dataBase) => {
                 type:DataTypes.BOOLEAN,
                 defaultValue: false
             },
-            image: {
-                type: DataTypes.STRING,
-                allowNull: false
-            }
 
         },
         {

@@ -1,1 +1,13 @@
-<p>detail works!</p>
+<div class="container">
+  <div class="card">
+      <div class="card-body">
+        <img src="{{product?.image}}" alt="{{product?.name}}">
+        <h5 class="card-title">{{product?.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">${{product?.price}}</h6>
+        <p href="#" class="card-link">Categoría: {{product?.category}}</p>
+        <p href="#" class="card-link">Talle: {{product?.size}}</p>
+        <p>Puntaje: {{product?.rating}}</p>
+        <p class="card-text">Descripción: {{product?.description}}</p>
+      </div>
+  </div>
+</div>

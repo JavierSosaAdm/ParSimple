@@ -89,9 +89,10 @@ const postUser = async (req, res) => {
             address: address,
             phone: phone,
             image: image,
-            is_Admin: is_Admin,
+            is_Admin: false,
             is_Delete: is_Delete
         }
+        
         const newUser = await postUserController(data)
         res.status(200).json(newUser);
     } catch (error) {
