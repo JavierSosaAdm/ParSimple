@@ -42,10 +42,6 @@ export class FireService {
   getProductsFire(): Observable<{id: string, data: Product} []> {
     return this.products;
   }
-
-  // getProductByName(name: string): Observable<Product[]> {
-  //   return 
-  // }
   
   upImageProd(image: File): Observable<string> {
     console.log('esto es imagen:', image);

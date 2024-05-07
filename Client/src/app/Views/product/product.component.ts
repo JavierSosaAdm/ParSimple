@@ -46,12 +46,19 @@ export class ProductsComponent implements OnInit {
     }
   }
   
-  // searchProduct(): void {
-  //   this._ProductService.getProductsByName(this.searchName).subscribe((data: Product[]) => {
-  //     this.ProductList = data;
-      
-  //   })
-  // }
+  searchProduct(searchName: string): void {
+    if (searchName) {
+      this._ProductService.getProductByNameFire(searchName).subscribe((products) => {
+        this.ProductList = products.filter((product) => product.id !== '');
+        console.log('esto es products', products);
+        
+        console.log('esto es lista de productos', this.ProductList);
+        
+      });
+    } else {
+      this.ProductList = [];
+    }
+  }
   
 }
 

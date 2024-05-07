@@ -1,6 +1,8 @@
 <div class="container">
-    <input type="text" [(ngModel)]= "searchName"  placeholder="Buscar producto por nombre">
-    
+    <form (ngSubmit)="searchProduct(searchName)">
+        <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
+        <button type="submit">Buscar</button>
+    </form>
     @if(ProductList.length === 0) {
             <h2>No se encontraron Productos con ese nombre</h2>
     }
