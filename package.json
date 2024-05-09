@@ -1,8 +1,6 @@
 {
   "dependencies": {
-    "@angular/common": "^17.3.4"
-  },
-  "devDependencies": {
-   
+    "@angular/common": "^17.3.4",
+    "mercadopago": "^2.0.9"
   }
 }
