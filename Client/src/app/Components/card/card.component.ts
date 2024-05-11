@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CartService } from '../../Services/cart.service';
 
 
 
@@ -22,6 +23,7 @@ export class CardComponent implements OnInit {
   private _fireService = inject(FireService)
   private _router = inject(Router);
   private _ProductService = inject(ProductService)
+  private _cartService = inject(CartService);
   public sanitizer = inject(DomSanitizer);
   menuSelected: string = '';
 
@@ -35,6 +37,12 @@ export class CardComponent implements OnInit {
     } else {
       console.error('Producto inválido o ID faltante');
     }
+  }
+
+  addCart():void {
+    console.log('esto es dataCart: ', this.product?.data);
+    this.product ? this._cartService.addProdCart(this.product.data) : console.error('No hay producto');
+    
   }
   ngOnInit(): void { 
   }

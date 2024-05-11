@@ -19,7 +19,7 @@ import { enviroment } from '../../../enviroment.prod';
 import { FireService } from '../Services/fire.service';
 import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
-
+// import { loadMercadoPago } from "@mercadopago/sdk-js";
 
 
 
@@ -42,7 +42,8 @@ import { UserService } from '../Services/user.service';
     NgModule,
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    
   ],
   exports: [
     ProductsComponent,
