@@ -8,6 +8,7 @@
           <p>Puntaje: {{product?.data?.rating}}</p>
           <button routerLink="products/:id" [ngClass]="{active: menuSelected == 'products/:id'}" (click)="verDetail()">Ver Dertalle</button>
           <button class="button" (click)="addCart()">Carrito</button>
+          <button class="button" (click)="addFav()">Favoritos</button>
         </div>
     </div>
   </div>

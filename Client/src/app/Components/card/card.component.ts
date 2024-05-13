@@ -6,6 +6,7 @@ import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from '../../Services/cart.service';
+import { FavoritesService } from '../../Services/favorites.service';
 
 
 
@@ -17,13 +18,15 @@ import { CartService } from '../../Services/cart.service';
   styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit {
-  @Input() product?: { id: string; data: Product };;
+  @Input() product?: { id: string; data: Product };
   loading: boolean = true;
 
+  favorites?: {id: string; data: Product};
   private _fireService = inject(FireService)
   private _router = inject(Router);
   private _ProductService = inject(ProductService)
   private _cartService = inject(CartService);
+  private _favService = inject(FavoritesService);
   public sanitizer = inject(DomSanitizer);
   menuSelected: string = '';
 
@@ -39,11 +42,15 @@ export class CardComponent implements OnInit {
     }
   }
 
-  addCart():void {
+  addCart(): void {
     console.log('esto es dataCart: ', this.product?.data);
     this.product ? this._cartService.addProdCart(this.product.data) : console.error('No hay producto');
-    
   }
+
+  addFav(): void {
+    this.product ? this._favService.addFav(this.product.data) : console.error('No favorites');
+  };
+
   ngOnInit(): void { 
   }
 }

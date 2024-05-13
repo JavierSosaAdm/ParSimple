@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
 import { catchError } from 'rxjs';
+import { CartService } from '../../Services/cart.service';
 @Component({
   selector: 'app-detail',
   standalone: true,
@@ -18,7 +19,7 @@ export class DetailComponent implements OnInit  {
   private _route = inject(ActivatedRoute);
   private _ProductService = inject(ProductService)
   private _FireService = inject(FireService)
-
+  private _cartService = inject(CartService);
   
   ngOnInit(): void {
    
@@ -39,5 +40,9 @@ export class DetailComponent implements OnInit  {
     });
   }
     
+   addFav(): void {
+    console.log('esto es dataCart: ', this.product);
+    this.product ? this._cartService.addProdCart(this.product) : console.error('No hay producto');
+   };
   }
 

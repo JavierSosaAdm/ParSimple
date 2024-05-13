@@ -10,6 +10,7 @@ import { ClientsComponent } from './Views/Dashboard/Views/clients/clients.compon
 import { OrdersComponent } from './Views/Dashboard/Views/orders/orders.component';
 import { PaymentsComponent } from './Views/Dashboard/Views/payments/payments.component';
 import { ProductComponent } from './Views/Dashboard/Views/products/products.component';
+import { FavoritesComponent } from './Views/favorites/favorites.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -23,5 +24,6 @@ export const routes: Routes = [
     {path: 'order', component: OrdersComponent},
     {path: 'payments', component: PaymentsComponent},
     {path: 'productsdashboard', component: ProductComponent},
+    {path: 'favorites', component: FavoritesComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

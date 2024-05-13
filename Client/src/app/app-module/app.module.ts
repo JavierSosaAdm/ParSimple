@@ -19,6 +19,7 @@ import { enviroment } from '../../../enviroment.prod';
 import { FireService } from '../Services/fire.service';
 import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
+import { FavoritesComponent } from '../Views/favorites/favorites.component';
 // import { loadMercadoPago } from "@mercadopago/sdk-js";
 
 
@@ -35,7 +36,8 @@ import { UserService } from '../Services/user.service';
     ClientsComponent,
     OrdersComponent,
     PaymentsComponent,
-    ProductComponent
+    ProductComponent,
+    FavoritesComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,7 @@ import { UserService } from '../Services/user.service';
     OrdersComponent,
     PaymentsComponent,
     ProductComponent,
-    
+    FavoritesComponent
   ],
   bootstrap: [AppComponent],
   providers: [FireService, ProductService, UserService]

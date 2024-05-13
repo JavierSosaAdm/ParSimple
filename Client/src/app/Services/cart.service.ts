@@ -16,4 +16,8 @@ export class CartService {
   getCartItems(): Product[] {
     return this.itemsCart.slice();
   }
+
+  removeCart(product: Product, id: string): void {
+    
+  };
 }
