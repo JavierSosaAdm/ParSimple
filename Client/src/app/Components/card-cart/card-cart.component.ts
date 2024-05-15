@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { loadMercadoPago } from '@mercadopago/sdk-js';
+
 
 @Component({
   selector: 'app-card-cart',

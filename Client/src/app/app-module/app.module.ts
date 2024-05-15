@@ -1,5 +1,6 @@
+
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from '../Views/product/product.component';
 import { HomeComponent } from '../Views/home/home.component';
@@ -20,7 +21,9 @@ import { FireService } from '../Services/fire.service';
 import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
 import { FavoritesComponent } from '../Views/favorites/favorites.component';
-// import { loadMercadoPago } from "@mercadopago/sdk-js";
+import { CardCartComponent } from '../Components/card-cart/card-cart.component';
+
+
 
 
 
@@ -37,11 +40,13 @@ import { FavoritesComponent } from '../Views/favorites/favorites.component';
     OrdersComponent,
     PaymentsComponent,
     ProductComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    CardCartComponent
   ],
   imports: [
     CommonModule,
     NgModule,
+    NgFor,
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule,
@@ -59,7 +64,8 @@ import { FavoritesComponent } from '../Views/favorites/favorites.component';
     OrdersComponent,
     PaymentsComponent,
     ProductComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    CardCartComponent
   ],
   bootstrap: [AppComponent],
   providers: [FireService, ProductService, UserService]

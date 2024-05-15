@@ -4,3 +4,19 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.resumeCont {
+    /* display: flex; */
+}
+
+.resumeTitle {
+    /* display: flex; */
+}
+
+.payment {
+    /* display: flex; */
+}
+
+.itemsCont{
+    /* display: flex; */
+}

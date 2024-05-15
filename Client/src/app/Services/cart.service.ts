@@ -9,7 +9,7 @@ export class CartService {
   
   addProdCart(product: Product): void {
     this.itemsCart.push(product)
-    console.log('aqui los productos de carrito: ->', this.itemsCart);
+    // console.log('aqui los productos de carrito: ->', this.itemsCart);
     
   }
 

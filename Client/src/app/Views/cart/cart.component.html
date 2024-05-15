@@ -1,39 +1,45 @@
-<section class="container">
+<div>
+
     <div>
-                    <app-card-cart/>
+        <!-- <app-card-cart/> -->
     </div>
-    <aside className={style.resumeCont}>
-        <div className={style.resumeTitle}>
-            <h3 className={style.title}>Resumen de compra</h3>
+    <section class="container">
+        <aside class="resumeCont">
+        <div class="resumeTitle">
+            <h3 class="title">Resumen de compra</h3>
         </div>
-        <div className={style.payment}>
-            <div className={style.paymentInfo}>
-                <div className={style.itemsCont}>
+        <div class="payment">
+            <div class="paymentInfo">
+                <div class="itemsCont">
                     <ul>
                         
-                                    <li>
-                                        <p>nombre</p>
-                                        <p>precio x cantidad</p>
-                                    </li>
-                                
-                            
-                        
+                        <li>
+                            @for(item of carts; track carts) {
+                                <p>Producto: {{ item.product.name }}</p>
+                                <p>Precio: {{ item.product.price }} x cantidad</p>
+                            } @empty {
+                                <p>Producto:</p>
+                                <p>Precio: </p>
+                            }
+                        </li>
+                           
                     </ul>
                 </div>
                 <div>
-                    <p>TOTAL:</p>
-                    <p>$precio total</p>
+                    <p>TOTAL: </p>
+                     <p>${{total}}</p>
                 </div>
             </div>  
             <div>
-                <button class="button" onclick="toBuy()">Comprar</button>
+                <button class="button" (click)="toBuy()">Comprar</button>
                 <script>
-                    const mp = new MercadoPago("TEST-d40f6edb-174f-4da2-b99c-6c8b4d676233");
+                    const mp = new MercadoPago(publicKey.keyPublic);
                 </script>
-                <button class="button" onclick="cancel()">Cancelar</button>
+                <button class="button" (click)="cancel()">Cancelar</button>
             </div>
         </div>
-         <p>aqui va spin</p>
+        <p>aqui va spin</p>
          <p>aqui va la wallet</p>
     </aside>
 </section>
+</div>

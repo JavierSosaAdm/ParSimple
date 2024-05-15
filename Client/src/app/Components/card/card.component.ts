@@ -43,7 +43,7 @@ export class CardComponent implements OnInit {
   }
 
   addCart(): void {
-    console.log('esto es dataCart: ', this.product?.data);
+    // console.log('esto es dataCart: ', this.product?.data);
     this.product ? this._cartService.addProdCart(this.product.data) : console.error('No hay producto');
   }
 
