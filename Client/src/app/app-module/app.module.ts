@@ -1,6 +1,5 @@
-
 import { NgModule } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from '../Views/product/product.component';
 import { HomeComponent } from '../Views/home/home.component';
@@ -24,9 +23,6 @@ import { FavoritesComponent } from '../Views/favorites/favorites.component';
 import { CardCartComponent } from '../Components/card-cart/card-cart.component';
 
 
-
-
-
 @NgModule({
   declarations: [
     ProductsComponent,
@@ -46,7 +42,6 @@ import { CardCartComponent } from '../Components/card-cart/card-cart.component';
   imports: [
     CommonModule,
     NgModule,
-    NgFor,
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule,

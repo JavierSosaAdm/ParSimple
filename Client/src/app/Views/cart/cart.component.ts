@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MercadoPagoConfig, Payment } from 'mercadopago'; // Importa los elementos necesarios de Mercado Pago
+import { MercadoPagoConfig, Payment, User } from 'mercadopago'; // Importa los elementos necesarios de Mercado Pago
 import { accesToken } from '../../../enviroments/enviroments'; // Importa tu token de acceso desde tus entornos
 import { CardCartComponent } from '../../Components/card-cart/card-cart.component'
 import { CartService } from '../../Services/cart.service';
@@ -12,10 +12,12 @@ import { Product } from '../../models/product.model';
 export class CartComponent implements OnInit {
   public carts: {product: Product; quantity: number;} [] = [];
   public total: number = 0; 
-  
+  private userComp: {user: User} [] = [];
   private _cartService = inject(CartService)
+  
   ngOnInit(): void {
     const cartItems = this._cartService.getCartItems();
+    console.log('esto es user', this.userComp);
 
     cartItems.length === 0 ? console.log('no hay productos en el carrito') 
     : this.carts = cartItems.map((product) => {
@@ -39,15 +41,18 @@ export class CartComponent implements OnInit {
 
     // Define el cuerpo de la solicitud para realizar el pago
     const body = {
-      transaction_amount: 12.34,
-      description: 'Descripción del pago',
+      total_amount: this.total,
+      // description: this.carts.map((item) => item.product.name).join(', ').toString(),
       payment_method_id: '', // Reemplaza con el ID del método de pago
       payer: {
         email: 'correo_electronico@example.com' // Reemplaza con el correo electrónico del pagador
       },
     };
     console.log('esto es body: -->', body);
-    
+
+    const requestOptions = {
+      idempotencyKey: '<IDEMPOTENCY_KEY>',
+    };
     // Realiza la solicitud de pago
     payment.create({ body })
       .then(response => console.log('Respuesta de la solicitud de pago:', response))

@@ -56,7 +56,10 @@ export class ProductsComponent implements OnInit {
         
       });
     } else {
-      this.ProductList = [];
+      this._fireService.getProductsFire().subscribe((data) => {
+        this.ProductList = data
+        console.log(this.ProductList);  
+      });
     }
   }
   
