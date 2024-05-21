@@ -41,4 +41,9 @@ export class UserService {
     return from(this.firestore.collection('user').doc(user.uid || uuidV4()).set(user))
   }
   
+  getUsers() {
+    console.log('esto es users: -->', this.users);
+    return this.users
+    
+  }
 }

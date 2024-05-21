@@ -15,12 +15,13 @@ export class AuthService implements OnInit {
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
   router = inject(Router);
-  // users = authState(this.auth)
+  // user: User = this.auth.getCurrentUser() as User;
   getAuth() {
     return getAuth();
   }
   ngOnInit(): void {
-    // this.currentUser = this.getAuth.getCurrentUser();
+    //  this.currentUser = this.auth.getCurrentUser;
+
   }
 
   singIn(user: User) {
@@ -31,7 +32,7 @@ export class AuthService implements OnInit {
     return await this.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  // getCurrentUser(): User | null{
-  //   return this.auth().currentUser
-  // }
+  getCurrentUser() {
+   return this.auth.user
+  }
 }
