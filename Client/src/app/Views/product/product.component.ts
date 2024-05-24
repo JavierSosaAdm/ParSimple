@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
 import { Product } from '../../models/product.model';
@@ -7,9 +7,6 @@ import { Router } from '@angular/router';
 import { CardComponent } from '../../Components/card/card.component'
 import { FormsModule } from '@angular/forms';
 import { CardsComponent } from '../../Components/cards/cards.component';
-
-
-
 
 
 @Component({
@@ -31,9 +28,10 @@ export class ProductsComponent implements OnInit {
   
   ngOnInit(): void {
     this._fireService.getProductsFire().subscribe((data) => {
-      this.ProductList = data
-      console.log(this.ProductList);  
-    });  
+            this.ProductList = data
+            console.log(this.ProductList);  
+          })
+     
   }
   
   navegate(product: { id: string, data: Product }): void {
@@ -62,10 +60,5 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
-  
-}
 
-// this._ProductService.getProducts().subscribe((data: Product[]) => {
-//   this.ProductList = data  
-//   console.log(this.ProductList);
-// })
+}

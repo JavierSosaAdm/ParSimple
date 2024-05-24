@@ -5,6 +5,7 @@ import { CardsComponent } from '../../Components/cards/cards.component';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../models/product.model';
 import { Router } from 'express';
+import { SearchComponent } from '../../Components/search/search.component';
 
 
 @Component({

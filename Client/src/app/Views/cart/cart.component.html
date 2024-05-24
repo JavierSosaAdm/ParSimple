@@ -1,7 +1,7 @@
-<div>
+<div class="container">
 
     <div>
-        <!-- <app-card-cart/> -->
+        <app-card-cart />
     </div>
     <section class="container">
         <aside class="resumeCont">
@@ -16,10 +16,10 @@
                         <li>
                             @for(item of carts; track carts) {
                                 <p>Producto: {{ item.product.name }}</p>
-                                <p>Precio: {{ item.product.price }} x cantidad</p>
+                                <p>Total: {{ item.product.price }} x cantidad</p>
                             } @empty {
                                 <p>Producto:</p>
-                                <p>Precio: </p>
+                                <p>Total: </p>
                             }
                         </li>
                            

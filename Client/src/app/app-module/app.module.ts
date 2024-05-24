@@ -21,6 +21,7 @@ import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
 import { FavoritesComponent } from '../Views/favorites/favorites.component';
 import { CardCartComponent } from '../Components/card-cart/card-cart.component';
+// import { SearchComponent } from '../Components/search/search.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CardCartComponent } from '../Components/card-cart/card-cart.component';
     PaymentsComponent,
     ProductComponent,
     FavoritesComponent,
-    CardCartComponent
+    CardCartComponent,
+    // SearchComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { CardCartComponent } from '../Components/card-cart/card-cart.component';
     PaymentsComponent,
     ProductComponent,
     FavoritesComponent,
-    CardCartComponent
+    CardCartComponent,
+    // SearchComponent
   ],
   bootstrap: [AppComponent],
   providers: [FireService, ProductService, UserService]

@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 4vh 1vh 0 1vh;
+
+}
+.card{
+    background-color: var(--color-grey-primary);
+    border: 2px solid var(--color-beige-primary);
+    transition: all 0.5s;
+    margin: 0.5rem;
+}
+.card:hover {
+    /* transform: translateY(-0.3rem); */
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(187, 141, 108);
+    transform: scale(1.02);
+    transition: 0.9s;
+}
+.img {
+    width: 50vh;
+    height: 50vh;
+}

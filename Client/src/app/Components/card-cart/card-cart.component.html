@@ -1,14 +1,18 @@
 <div>
-    <div></div>
-    <div>
-        <!-- <img src="hola.com.png"/> -->
+    
         <div>
-          <button>-</button>
-          <button>+</button>
-        </div>
-        <p>precio por cantidad</p>
-        <div>
-          <button>boton de borrar</button>
-        </div>
-    </div>
+          
+          @for (item of carts; track carts) {
+            <h5>{{item.product.name}} x {{quantity}}</h5>
+          
+          <div>
+            <button (clic)="decrement(item)">-</button>
+            <button (clic)="increment(item)">+</button>
+          </div>
+          <p>${{subTotal}}</p>
+          <div>
+            <!-- <button (click)="removeProduct(item.product)">boton de borrar</button> -->
+          </div>
+        }
+      </div>
 </div>

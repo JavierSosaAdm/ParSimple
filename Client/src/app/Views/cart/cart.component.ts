@@ -7,6 +7,8 @@ import { Product } from '../../models/product.model';
 import { AuthService } from '../../auth/auth.service';
 @Component({
   selector: 'app-cart',
+  standalone: true,
+  imports: [CardCartComponent],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
@@ -20,28 +22,22 @@ export class CartComponent implements OnInit {
   
     ngOnInit(): void {
     const cartItems = this._cartService.getCartItems();
-    // console.log('esto es userComp', this.userComp);
-
     cartItems.length === 0 ? console.log('no hay productos en el carrito') 
     : this.carts = cartItems.map((product) => {
       return { product, quantity: 1 } 
     }); 
+    console.log(cartItems);
+    
     this.calculateTotal();
-    // console.log('prod agreg al carr: ', this.carts)
     this._authService.getCurrentUser().subscribe((data) => {
       if (data) {
         this.current = data.email?.toString()
-
-        console.log('dale que es el ultimo esfuerzo cajetaaa', this.current);
-        
+        console.log('Este es el mail autenticado', this.current);
       }
     })
-
-    
   }
   calculateTotal() {
     this.total = this.carts.reduce((total, item) => total + (item.product.price * item.quantity), 0)
-    console.log('esto es el total', this.total);
   };
 
   
@@ -58,8 +54,7 @@ export class CartComponent implements OnInit {
       // description: this.carts.map((item) => item.product.name).join(', ').toString(),
       payment_method_id: '', // Reemplaza con el ID del método de pago
       payer: {
-        email: this.current // Reemplaza con el correo electrónico del pagador
-        
+        email: this.current // Reemplaza con el correo electrónico del pagador 
       },
     };
     console.log('esto es body: -->', body);

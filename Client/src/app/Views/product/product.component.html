@@ -3,13 +3,18 @@
         <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
         <button type="submit">Buscar</button>
     </form>
-    @if(ProductList.length === 0) {
+    <div class="ProductList">
+        @if(ProductList.length === 0) {
             <h2>No se encontraron Productos con ese nombre</h2>
-    }
-    @if(ProductList.length > 0) {
-        @for(product of ProductList; track product.id) {
-            <app-card *ngFor="let product of ProductList" [product]="product"/>
         }
-    }
-    
+        @if(ProductList.length > 0) {
+            @for(product of ProductList; track product.id) {
+                <ul>
+                    <li>
+                        <app-card [product]="product"/>
+                    </li>
+                </ul>
+            }
+        }     
+    </div>
 </div>
