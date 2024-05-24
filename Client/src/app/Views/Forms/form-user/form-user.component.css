@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    width: 80vh;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    background-color: rgba(0, 0, 0, 0.276);
+    border-radius: 10px;
+    height: 120vh;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 80vh;
+    max-width: 75vh;
+}
+
+.Title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

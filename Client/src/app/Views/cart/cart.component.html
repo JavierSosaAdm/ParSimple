@@ -1,33 +1,31 @@
-<div class="container">
-
-    <div>
+<div class="resumeTitle">
+    <h3 class="title">Resumen de compra</h3>
+</div>
+<section class="container">
+    <div class="cart-prod">
         <app-card-cart />
     </div>
-    <section class="container">
-        <aside class="resumeCont">
-        <div class="resumeTitle">
-            <h3 class="title">Resumen de compra</h3>
-        </div>
-        <div class="payment">
+    <aside class="resumeCont">
+        <div class="resumeCont">
+            <div class="payment">
             <div class="paymentInfo">
                 <div class="itemsCont">
+                    <h6>Tus compras</h6>
                     <ul>
-                        
                         <li>
                             @for(item of carts; track carts) {
-                                <p>Producto: {{ item.product.name }}</p>
-                                <p>Total: {{ item.product.price }} x cantidad</p>
+                                <p class="prod">Producto: {{ item.product.name }}</p>
+                                <p class="total">Total: {{ item.product.price }} x cantidad</p>
                             } @empty {
-                                <p>Producto:</p>
-                                <p>Total: </p>
+                                <p class="prod">Producto:</p>
+                                <p class="total">Total: </p>
                             }
-                        </li>
-                           
+                        </li>  
                     </ul>
                 </div>
                 <div>
                     <p>TOTAL: </p>
-                     <p>${{total}}</p>
+                    <p>${{total}}</p>
                 </div>
             </div>  
             <div>
@@ -37,9 +35,9 @@
                 </script>
                 <button class="button" (click)="cancel()">Cancelar</button>
             </div>
+            </div>
+            <p>aqui va spin</p>
+            <p>aqui va la wallet</p>
         </div>
-        <p>aqui va spin</p>
-         <p>aqui va la wallet</p>
     </aside>
 </section>
-</div>
