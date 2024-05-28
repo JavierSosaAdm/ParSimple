@@ -3,13 +3,14 @@
     @for (item of carts; track carts) {
       <h5 class="title">{{item.product.name}} x {{quantity}}</h5>
     <img class="img" src="{{item.product.image}}" alt="Imagen del producto">
+    <p>este es el id: {{item.id}}</p>
     <div>
-      <button (clic)="decrement(item)">-</button>
-      <button (clic)="increment(item)">+</button>
+      <button (clic)="decrement(quantity)">-</button>
+      <button (clic)="increment(quantity)">+</button>
     </div>
     
     <div>
-      <button>boton de borrar</button>
+      <button (click)="removeProduct(item.id)">boton de borrar</button>
     </div>
     }
   </div>

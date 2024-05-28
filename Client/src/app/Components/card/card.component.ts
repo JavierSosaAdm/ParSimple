@@ -18,7 +18,7 @@ import { FavoritesService } from '../../Services/favorites.service';
   styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit {
-  @Input() product?: { id: string; data: Product };
+  @Input() product?: { id: string; data: Product; quantity: number;};
   loading: boolean = true;
 
   favorites?: {id: string; data: Product};
@@ -44,7 +44,7 @@ export class CardComponent implements OnInit {
 
   addCart(): void {
     // console.log('esto es dataCart: ', this.product?.data);
-    this.product ? this._cartService.addProdCart(this.product.data) : console.error('No hay producto');
+    this.product && this.product.id ? this._cartService.addProdCart(this.product.data, this.product.id, this.product.quantity) : console.error('No hay producto');
   }
 
   addFav(): void {

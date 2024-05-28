@@ -5,19 +5,21 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class CartService {
-  private itemsCart: Product[] = [];
+  private itemsCart: {product: Product, id: string; quantity: number;} [] = [];
   
-  addProdCart(product: Product): void {
-    this.itemsCart.push(product)
-    // console.log('aqui los productos de carrito: ->', this.itemsCart);
-    
+  addProdCart(product: Product, id: string, quantity: number): void {
+    this.itemsCart.push({product, id, quantity})  
   }
 
-  getCartItems(): Product[] {
+  getCartItems(): {product: Product, id: string; quantity: number;}[] {
     return this.itemsCart.slice();
   }
 
-  removeCart(product: Product, id: string): void {
-    
+
+  removeCart(id: string): {product: Product, id: string; quantity: number;} [] {
+    console.log('esto es el id que me pasaron de cart', id);
+    const filters = this.itemsCart.filter((item) => item.id !== id)
+    return this.itemsCart = filters
   };
+  
 }

@@ -17,7 +17,7 @@ import { CardsComponent } from '../../Components/cards/cards.component';
   styleUrl: './product.component.css'
 })
 export class ProductsComponent implements OnInit {
-  ProductList: { id: string, data: Product }[] = [];
+  ProductList: { id: string, data: Product}[] = [];
   searchName: string = '';
   
   

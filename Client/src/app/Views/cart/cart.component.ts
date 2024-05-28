@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { MercadoPagoConfig, Payment, User } from 'mercadopago'; // Importa los elementos necesarios de Mercado Pago
 import { accesToken } from '../../../enviroments/enviroments'; // Importa tu token de acceso desde tus entornos
 import { CardCartComponent } from '../../Components/card-cart/card-cart.component'
@@ -12,15 +12,15 @@ import { AuthService } from '../../auth/auth.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
-  public carts: {product: Product; quantity: number;} [] = [];
+export class CartComponent implements OnInit, OnChanges {
+  public carts: {product: {product: Product, id: string}, quantity: number } [] = [];
   public total: number = 0; 
   private _cartService = inject(CartService)
   private _authService = inject(AuthService)
   private current: string | undefined = '';
   
   
-    ngOnInit(): void {
+  ngOnInit(): void {
     const cartItems = this._cartService.getCartItems();
     cartItems.length === 0 ? console.log('no hay productos en el carrito') 
     : this.carts = cartItems.map((product) => {
@@ -37,10 +37,12 @@ export class CartComponent implements OnInit {
     })
   }
   calculateTotal() {
-    this.total = this.carts.reduce((total, item) => total + (item.product.price * item.quantity), 0)
+    this.total = this.carts.reduce((total, item) => total + (item.product.product.price * item.quantity), 0)
   };
 
-  
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
   async toBuy() {
     // Inicializa el objeto cliente directamente con tu token de acceso
     const client = new MercadoPagoConfig({ accessToken: accesToken.token });

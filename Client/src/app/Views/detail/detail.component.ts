@@ -40,9 +40,9 @@ export class DetailComponent implements OnInit  {
     });
   }
     
-   addFav(): void {
-    console.log('esto es dataCart: ', this.product);
-    this.product ? this._cartService.addProdCart(this.product) : console.error('No hay producto');
-   };
-  }
+  //  addFav(): void {
+  //   console.log('esto es dataCart: ', this.product);
+  //   this.product ? this._cartService.addProdCart(this.product) : console.error('No hay producto');
+  //  };
+ }
 

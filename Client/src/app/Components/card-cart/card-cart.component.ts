@@ -12,7 +12,7 @@ import { Product } from '../../models/product.model';
   styleUrl: './card-cart.component.css'
 })
 export class CardCartComponent implements OnInit {
-  public carts: {product: Product; quantity: number;} [] = [];
+  public carts: {product: Product, id: string; } [] = [];
   public total: number = 0; 
   public subTotal: number = 0;
   public quantity: number = 1;
@@ -22,38 +22,34 @@ export class CardCartComponent implements OnInit {
   ngOnInit(): void {
     const cartItems = this._cartService.getCartItems();
     cartItems.length === 0 ? console.log('no hay productos en el carrito') 
-    : this.carts = cartItems.map((product) => {
-      return { product, quantity: 1 } 
+    : this.carts = cartItems.map((item) => {
+      return item 
     }); 
     console.log('esto es el carrito de card-cart', cartItems);
     
     this.calculateTotal();
   }
   calculateTotal() {
-    this.total = this.carts.reduce((total, item) => total + (item.product.price * item.quantity), 0)
+    this.total = this.carts.reduce((total, item) => total + (item.product.price * item.product.quantity), 0)
   };
 
   calculateSubTotal() {
-    const items = this.carts.map((item) => this.subTotal + (item.product.price * item.quantity), 0 )
-    // this.subTotal = 
+    
   };
-  decrement(product: {product: Product, quantity: number}) {
-    if (product.quantity > 1) {
-      product.quantity--
-    }
-    this.calculateTotal();
+  decrement(quantity: number) {
+    
   };
-  increment(product: {product: Product, quantity: number}) {
-    if (product.quantity < 10) {
-      product.quantity++
-    }
-    this.calculateTotal();
+  increment(quantity: number) {
+    
   };
 
-  removeProduct(productToRemove: { product: Product; quantity: number }) {
-    const upDateCarts = this.carts.filter(item => item !== productToRemove) 
-    this.carts = upDateCarts;
+  removeProduct(id: string) {
+    console.log('esto es el id de la cart', id); 
+    const cartItems = this._cartService.removeCart(id)
+    this.carts = cartItems
+    
     this.calculateTotal();
+    
   }
   
 }

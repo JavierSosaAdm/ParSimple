@@ -45,7 +45,7 @@ export class ProductService {
     return this._http.get<Product[]>(`${this.baseURL}/products?name=${name}`);
  }
 
- getProductByNameFire(name: string): Observable<{ id: string; data: Product; }[]> {
+ getProductByNameFire(name: string): Observable<{ id: string; data: Product;}[]> {
   return this.productCollection.snapshotChanges().pipe(
     
     map((actions: DocumentChangeAction<Product>[]) =>

@@ -14,8 +14,8 @@
                     <ul>
                         <li>
                             @for(item of carts; track carts) {
-                                <p class="prod">Producto: {{ item.product.name }}</p>
-                                <p class="total">Total: {{ item.product.price }} x cantidad</p>
+                                <p class="prod">Producto: {{ item.product.product.name }}</p>
+                                <p class="total">Total: {{ item.product.product.price }} x cantidad</p>
                             } @empty {
                                 <p class="prod">Producto:</p>
                                 <p class="total">Total: </p>
