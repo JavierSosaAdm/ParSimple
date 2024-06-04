@@ -1,6 +1,7 @@
+import { Product } from "./product.model";
 export interface Cart {
     id_Cart:            string;
-    products:           [JSON] | null;
+    products:           Product;
     product_quantity:   number;
     total_price:        number;
 }

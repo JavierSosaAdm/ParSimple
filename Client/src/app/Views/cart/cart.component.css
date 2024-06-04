@@ -19,17 +19,13 @@
 }
 
 .cart-prod{
-    width: 50vw;
-    height: 70vh;
-    border-radius: 20px;
-    padding: 10px;
-    gap: 10px;
-    overflow-y: scroll;
     display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    border-radius: 0.5;
+    flex-direction: row;
+    width:70%;
+    height: 30vh;
+    border: 1px solid #dedede;
+    border-radius: 25px;
+    background-color: beige;
 }
 
 .resumeTitle {
@@ -43,4 +39,20 @@
 }
 .total{
     max-width: 20vh;
+}
+
+.title{
+    display: flex;
+    height: 20%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: bold;
+}
+
+.img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }

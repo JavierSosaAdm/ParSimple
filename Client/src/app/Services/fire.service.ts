@@ -19,7 +19,7 @@ export class FireService {
   private storage: AngularFireStorage;
   private firestore: AngularFirestore;
   private productCollection: AngularFirestoreCollection<Product>;
-  products: Observable<{id: string, data: Product, quantity: number | null}[]>;
+  products: Observable<{id: string, data: Product}[]>;
   
   constructor(storage: AngularFireStorage, firestore: AngularFirestore ) {
     this.storage = storage;
@@ -39,7 +39,7 @@ export class FireService {
     return from(this.firestore.collection('products').doc(product.id_product || uuidV4()).set(product));
   }
 
-  getProductsFire(): Observable<{id: string, data: Product, quantity: number | null} []> {
+  getProductsFire(): Observable<{id: string, data: Product} []> {
     return this.products;
   }
   

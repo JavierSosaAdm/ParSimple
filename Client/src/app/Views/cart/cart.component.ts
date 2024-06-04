@@ -5,6 +5,8 @@ import { CardCartComponent } from '../../Components/card-cart/card-cart.componen
 import { CartService } from '../../Services/cart.service';
 import { Product } from '../../models/product.model';
 import { AuthService } from '../../auth/auth.service';
+import { Cart } from '../../models/cart.model';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -12,47 +14,47 @@ import { AuthService } from '../../auth/auth.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit, OnChanges {
-  public carts: {product: {product: Product, id: string}, quantity: number } [] = [];
+export class CartComponent implements OnInit {
+  
+  public carts: Cart[] = [];
+  public subTotal: number = 0;  
   public total: number = 0; 
   private _cartService = inject(CartService)
   private _authService = inject(AuthService)
   private current: string | undefined = '';
   
   
-  ngOnInit(): void {
-    const cartItems = this._cartService.getCartItems();
-    cartItems.length === 0 ? console.log('no hay productos en el carrito') 
-    : this.carts = cartItems.map((product) => {
-      return { product, quantity: 1 } 
-    }); 
-    console.log(cartItems);
-    
-    this.calculateTotal();
+  getCarts() {
+    this.carts = this._cartService.getCartItems()
+
+  } 
+  ngOnInit() {
+    this.getCarts();
+    console.log('esto es carts ahora: ', this.carts);
+    this.carts.length === 0 ? console.log('No hay productos en el carrito')
+    : this.carts.map((item) => {
+      return item
+    })
+
     this._authService.getCurrentUser().subscribe((data) => {
       if (data) {
         this.current = data.email?.toString()
         console.log('Este es el mail autenticado', this.current);
       }
     })
+    this.calculateTotal()
   }
-  calculateTotal() {
-    this.total = this.carts.reduce((total, item) => total + (item.product.product.price * item.quantity), 0)
-  };
-
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
+  
   async toBuy() {
     // Inicializa el objeto cliente directamente con tu token de acceso
     const client = new MercadoPagoConfig({ accessToken: accesToken.token });
     
     // // Crea el objeto de pago con el cliente inicializado
     const payment = new Payment(client);
-
+    
     // Define el cuerpo de la solicitud para realizar el pago
     const body = {
-      total_amount: this.total,
+      total_amount: 'this.total',
       // description: this.carts.map((item) => item.product.name).join(', ').toString(),
       payment_method_id: '', // Reemplaza con el ID del método de pago
       payer: {
@@ -66,11 +68,37 @@ export class CartComponent implements OnInit, OnChanges {
     };
     // Realiza la solicitud de pago
     payment.create({ body })
-      .then(response => console.log('Respuesta de la solicitud de pago:', response))
+    .then(response => console.log('Respuesta de la solicitud de pago:', response))
       .catch(error => console.error('Error al realizar la solicitud de pago:', error));
-  }
+    }
 
   cancel(): void {
+    
     // Implementa la lógica para cancelar el pago si es necesario
   }
+  decrement(item: Cart) {
+    item.product_quantity--;
+    console.log('cantidad de productos:', item.product_quantity);
+    this._cartService.updateQantity(item)
+    console.log('se resto');
+  };
+  increment(item: Cart) {
+    item.product_quantity++;
+    console.log('cantidad de productos:', item.product_quantity);
+    
+    this._cartService.updateQantity(item)
+    console.log('se sumo');
+  }
+
+  calculateSubTotal() {
+     
+    
+  };
+
+  calculateTotal() {
+    
+    this.total = this.carts.reduce((total, item) => total + (item.product_quantity * item.products.price), 0)
+  
+  };
 }
+

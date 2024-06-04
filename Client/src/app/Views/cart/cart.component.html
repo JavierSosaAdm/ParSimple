@@ -3,7 +3,23 @@
 </div>
 <section class="container">
     <div class="cart-prod">
-        <app-card-cart />
+        <div >   
+            <div>  
+              @for (item of carts; track carts) {
+                <h5 class="title">{{item.products.name}} x {{item.product_quantity}}</h5>
+                <img class="img" src="{{item.products.image}}" alt="Imagen del producto">
+                <p>este es el id: {{item.id_Cart}}</p>
+              <div>
+                <button type="submit" (click)="decrement(item)" class="btn btn-primary">-</button>
+                <button type="submit" (click)="increment(item)" class="btn btn-primary">+</button>
+              </div>
+              
+              <div>
+                <!-- <button (click)="removeProduct(item.id)">boton de borrar</button> -->
+              </div>
+              }
+            </div>
+        </div>
     </div>
     <aside class="resumeCont">
         <div class="resumeCont">
@@ -14,18 +30,18 @@
                     <ul>
                         <li>
                             @for(item of carts; track carts) {
-                                <p class="prod">Producto: {{ item.product.product.name }}</p>
-                                <p class="total">Total: {{ item.product.product.price }} x cantidad</p>
+                                <p class="prod">Producto: {{ item.products.name }}</p>
+                                <p class="subTotal">Sub-Total: {{ item.products.price }} x {{item.product_quantity}}</p>
                             } @empty {
                                 <p class="prod">Producto:</p>
-                                <p class="total">Total: </p>
+                                <p class="total">Total: {{total}} </p>
                             }
                         </li>  
                     </ul>
                 </div>
                 <div>
                     <p>TOTAL: </p>
-                    <p>${{total}}</p>
+                    <p>${{this.total}}</p>
                 </div>
             </div>  
             <div>
