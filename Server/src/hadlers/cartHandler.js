@@ -4,6 +4,7 @@ const getCartById = async (req, res) => {
     const { id_Cart } = req.params;
     try {
         const cartId = await getCartByIdController(id_Cart);
+        console.log('id desde handlers', id_Cart);
         return res.status(200).json(cartId);
     } catch (error) {
         return res.status(400).json({error: error.message})
