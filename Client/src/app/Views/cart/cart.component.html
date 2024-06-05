@@ -6,16 +6,16 @@
         <div >   
             <div>  
               @for (item of carts; track carts) {
-                <h5 class="title">{{item.products.name}} x {{item.product_quantity}}</h5>
+                <h5 class="title">{{item.products.name}}</h5>
                 <img class="img" src="{{item.products.image}}" alt="Imagen del producto">
-                <p>este es el id: {{item.id_Cart}}</p>
+                <!-- <p>este es el id: {{item.id_Cart}}</p> -->
               <div>
                 <button type="submit" (click)="decrement(item)" class="btn btn-primary">-</button>
                 <button type="submit" (click)="increment(item)" class="btn btn-primary">+</button>
               </div>
               
               <div>
-                <!-- <button (click)="removeProduct(item.id)">boton de borrar</button> -->
+                <button (click)="removeProduct(item.id_Cart)">boton de borrar</button>
               </div>
               }
             </div>
@@ -31,10 +31,11 @@
                         <li>
                             @for(item of carts; track carts) {
                                 <p class="prod">Producto: {{ item.products.name }}</p>
-                                <p class="subTotal">Sub-Total: {{ item.products.price }} x {{item.product_quantity}}</p>
+                                <p>Unidades: {{item.product_quantity}}</p>
+                                <p class="subTotal">Sub-Total: ${{item.total_price}}</p>
                             } @empty {
                                 <p class="prod">Producto:</p>
-                                <p class="total">Total: {{total}} </p>
+                                <p class="total">Total: $0 </p>
                             }
                         </li>  
                     </ul>

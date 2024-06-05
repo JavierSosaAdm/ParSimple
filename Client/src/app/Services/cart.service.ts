@@ -47,23 +47,29 @@ export class CartService {
     }
     console.log('esto es cart', cart);
     
-    this.itemsCart.forEach((item) => {
-      return item.id_Cart !== cartId ? console.log('no hay ID')
-      : item.product_quantity = cart.product_quantity
-    })
-
-    return this.firestore
-      .collection('cart')
-      .doc(cartId)
-      .update({ quantity: cart.products.quantity }) // Actualizar solo el campo de cantidad
-      
+    for (let i = 0; i < this.itemsCart.length; i++) {
+      if (this.itemsCart[i].id_Cart === cartId) {
+        this.itemsCart[i].product_quantity = cart.product_quantity;
+        this.itemsCart[i].total_price = cart.products.price * this.itemsCart[i].product_quantity;
+        console.log('este es el quantity modificado: ', this.itemsCart[i].product_quantity); 
+        console.log('este es el total price modificado: ', this.itemsCart[i].total_price);
+        
+      }
+    };
   }
+
+  removeCart(id: string) {
+      console.log('esto es el id que me pasaron de cart', id);
+      const filters = this.itemsCart.filter((item) => item.id_Cart !== id)
+      return this.itemsCart = filters
+    };
 };
 
-  // removeCart(id: string) {
-  //   // console.log('esto es el id que me pasaron de cart', id);
-  //   // const filters = this.itemsCart.filter((item) => item.id !== id)
-  //   // return this.itemsCart = filters
-  // };
   
-
+  
+  //-------------------------------------------
+  // MODIFICAR BASE DE DATOS (Por el momento innesesario)
+  // return this.firestore
+  //   .collection('cart')
+  //   .doc(cartId)
+  //   .update({ quantity: cart.products.quantity }) // Actualizar solo el campo de cantidad

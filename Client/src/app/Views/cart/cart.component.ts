@@ -17,7 +17,7 @@ import { Observable } from 'rxjs';
 export class CartComponent implements OnInit {
   
   public carts: Cart[] = [];
-  public subTotal: number = 0;  
+  // public subTotal: number = 0;  
   public total: number = 0; 
   private _cartService = inject(CartService)
   private _authService = inject(AuthService)
@@ -26,7 +26,6 @@ export class CartComponent implements OnInit {
   
   getCarts() {
     this.carts = this._cartService.getCartItems()
-
   } 
   ngOnInit() {
     this.getCarts();
@@ -77,28 +76,42 @@ export class CartComponent implements OnInit {
     // Implementa la lógica para cancelar el pago si es necesario
   }
   decrement(item: Cart) {
-    item.product_quantity--;
-    console.log('cantidad de productos:', item.product_quantity);
-    this._cartService.updateQantity(item)
-    console.log('se resto');
+    // console.log('esto es item', item);
+    if (item.product_quantity > 1) {
+      item.product_quantity--;
+      // console.log('cantidad de productos:', item.product_quantity);
+      this._cartService.updateQantity(item)
+      console.log('se resto');
+      // this.calculateSubTotal()
+      this.calculateTotal()
+    } else {
+      console.log('Debe haber al menos dos productos');
+      
+    }
   };
   increment(item: Cart) {
-    item.product_quantity++;
-    console.log('cantidad de productos:', item.product_quantity);
+    // console.log('esto es item', item.id_Cart);
     
-    this._cartService.updateQantity(item)
-    console.log('se sumo');
+    if (item.product_quantity < 10) {
+      item.product_quantity++;
+      // console.log('cantidad de productos:', item.product_quantity);
+      this._cartService.updateQantity(item)
+      console.log('se sumo');
+      // this.calculateSubTotal()
+      this.calculateTotal()
+    } else {
+      console.log('Solo se pueden comprar hasta 10 productos');
+      
+    }
   }
-
-  calculateSubTotal() {
-     
-    
-  };
-
   calculateTotal() {
-    
-    this.total = this.carts.reduce((total, item) => total + (item.product_quantity * item.products.price), 0)
-  
+    this.total = this.carts.reduce((total, item) => total + (item.products.price * item.product_quantity), 0)
   };
+
+  removeProduct(id: string) {
+    this._cartService.removeCart(id)
+    this.getCarts()
+    this.calculateTotal()
+  }
 }
 

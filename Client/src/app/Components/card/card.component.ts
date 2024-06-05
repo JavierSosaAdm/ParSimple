@@ -44,24 +44,20 @@ export class CardComponent implements OnInit {
   }
   
   addCart(): void {
-    
+    let price = this.product?.data.price;
+    let quantity = 1;
     if (this.product && this.product.id) {
       let data: Cart = {
         id_Cart: this.product.id,
         products: this.product.data,
-        product_quantity: 1,
-        total_price: this.product.data.price
+        product_quantity: quantity,
+        total_price: price ? price * quantity : 0
       }
-      this._cartService.addProdCart(data) 
-      console.log('esto es data del addCart', data);
-      
+      this._cartService.addProdCart(data)   
     } else {
       console.log('no hay producto en el carrito');
     }
-    
-    
   }
-  // this._cartService.addProdCart() : console.error('No hay producto');
   
   addFav(): void {
     this.product ? this._favService.addFav(this.product.data) : console.error('No favorites');
