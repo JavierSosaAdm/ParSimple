@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
 import { CardComponent } from '../../Components/card/card.component'
 import { FormsModule } from '@angular/forms';
 import { CardsComponent } from '../../Components/cards/cards.component';
+import { FiltersComponent } from '../../Components/filters/filters.component';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, CardComponent],
+  imports: [CommonModule, FormsModule, CardComponent, FiltersComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })

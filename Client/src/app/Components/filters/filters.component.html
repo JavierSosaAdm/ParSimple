@@ -1,0 +1,18 @@
+<div>
+    @if (ProductList.length > 0) {
+       
+            <ol class="nav-item dropdown" >
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Category
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a id="Todos" (click)="filterCategory('id')">Todos</a></li>
+                  <li><a id="Blue" (click)="filterCategory('id')">Blue</a></li>
+                  <li><a id="Grey" (click)="filterCategory('id')">Grey</a></li>
+                  <li><a id="Black" (click)="filterCategory('id')">Black</a></li>
+                  <li><a id="Classic" (click)="filterCategory('id')">Classic</a></li>
+                </ul>
+              </ol>
+        
+    }
+</div>

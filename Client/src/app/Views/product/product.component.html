@@ -3,6 +3,7 @@
         <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
         <button type="submit">Buscar</button>
     </form>
+    <app-filters/>
     <div class="ProductList">
         @if(ProductList.length === 0) {
             <h2>No se encontraron Productos con ese nombre</h2>
