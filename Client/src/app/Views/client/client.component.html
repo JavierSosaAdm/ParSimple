@@ -1,1 +1,17 @@
-<h1>Aqui va espacio de clientes</h1>
+<div>
+    @if (userList.length === 0) {
+        <h1>Loading...</h1>
+    }
+    @if (userList.length > 0) {
+        @for(user of userList; track user.id) {
+            <ul>
+                <li>{{user.data.email}}</li>
+                <p>{{user.data.name}}</p>
+                <p>{{user.data.lastName}}</p>
+                <p>{{user.data.phone}}</p>
+                <p>{{user.data.address}}</p>
+            </ul>
+        }
+    }
+    <h1></h1>
+</div>
