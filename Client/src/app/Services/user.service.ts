@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, finalize, from, map, throwError, catchError } from 'rxjs';
@@ -12,14 +13,17 @@ import { doc } from 'firebase/firestore';
 })
 export class UserService {
 
+  
+  users: Observable<{id: string, data: User}[]>;
   private _http = inject(HttpClient);
   private baseURL: string = enviroment.apiURL
   private storage: AngularFireStorage;
   private firestore: AngularFirestore;
   private userCollection: AngularFirestoreCollection<User>;
-  users: Observable<{id: string, data: User}[]>;
+  
 
   constructor(storage: AngularFireStorage, firestore: AngularFirestore) {
+    
     this.storage = storage;
     this.firestore = firestore;
     this.userCollection = firestore.collection<User>('user');
@@ -39,11 +43,20 @@ export class UserService {
   }
   postUserFire(user: User): Observable<void> {
     return from(this.firestore.collection('user').doc(user.uid || uuidV4()).set(user))
+    .pipe(
+      catchError((err) => {
+        console.log('Error al crear usuario en Firestore:', err);
+        return throwError(err);
+      })
+    )
   }
   
-  getUsers() {
-    console.log('esto es users: -->', this.users);
+  getUsers(): Observable<{data: User, id: string}[]> {
     return this.users
-    
+  }
+
+  async getUserByEmail(email: string | null) {
+    // this.users
+
   }
 }

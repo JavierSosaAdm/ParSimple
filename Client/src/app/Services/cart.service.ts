@@ -27,10 +27,8 @@ export class CartService {
       );
   }
   addProdCart(cart: Cart): Observable<void> {
-    console.log('se esta agregando la cart a firebase');
-    this.itemsCart.push(cart);
-    console.log('esto es itemscart',this.itemsCart);
     
+    this.itemsCart.push(cart);
     return from(this.firestore.collection('cart').doc(uuidV4()).set(cart))
   }
 

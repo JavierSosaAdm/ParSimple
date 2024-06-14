@@ -18,7 +18,7 @@ export class FormUserComponent implements OnInit {
   private _UserService = inject(UserService);
   private _auth = inject(AuthService);
   private _router = inject(Router);
-
+  uid: string | undefined = '';
   constructor(private FormBuilder: FormBuilder) {
     this.data = this.FormBuilder.group({
       uid: ['', [Validators.required]], // //
@@ -43,16 +43,20 @@ export class FormUserComponent implements OnInit {
     try {
       const userCredential = await this._auth.createUserWithEmailAndPassword(email, password);
       console.log('Usuario creado exitosamente:', userCredential);
-      this._UserService.postUserFire(this.data.value).subscribe()
-      
+      // this.uid = userCredential.user?.uid
+
+      await this._UserService.postUserFire(this.data.value).subscribe({
+        next: () => {
+          console.log('userPost exitoso? ', this.data.value);
+          this._router.navigate(['/']); // redirección a home page
+        }
+      })     
     } catch (error) {
         console.error('Error al crear usuario:', error);
     }
-    console.log(this.data.value);
-    this._router.navigate(['/']); // redirección a home page
   }
   ngOnInit(): void {
-    console.log('esto es el formulario de registro de usuarios');
+    
   }
 
   hasErrors(field: string, typeError: string) {

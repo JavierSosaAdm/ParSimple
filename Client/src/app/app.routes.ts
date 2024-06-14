@@ -11,6 +11,7 @@ import { OrdersComponent } from './Views/Dashboard/Views/orders/orders.component
 import { PaymentsComponent } from './Views/Dashboard/Views/payments/payments.component';
 import { ProductComponent } from './Views/Dashboard/Views/products/products.component';
 import { FavoritesComponent } from './Views/favorites/favorites.component';
+import { ClientComponent } from './Views/client/client.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,10 +21,11 @@ export const routes: Routes = [
     {path: 'register', component: FormUserComponent},
     {path: 'cart', component: CartComponent},
     {path: 'about', component: AboutComponent},
-    {path: 'client', component: ClientsComponent},
+    {path: 'clients', component: ClientsComponent},
     {path: 'order', component: OrdersComponent},
     {path: 'payments', component: PaymentsComponent},
     {path: 'productsdashboard', component: ProductComponent},
     {path: 'favorites', component: FavoritesComponent},
+    {path: 'client', component: ClientComponent},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

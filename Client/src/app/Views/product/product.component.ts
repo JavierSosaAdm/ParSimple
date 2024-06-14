@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this._fireService.getProductsFire().subscribe((data) => {
             this.ProductList = data
-            console.log(this.ProductList);  
+            // console.log(this.ProductList);  
           })
      
   }

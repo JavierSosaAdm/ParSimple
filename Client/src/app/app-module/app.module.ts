@@ -21,6 +21,7 @@ import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
 import { FavoritesComponent } from '../Views/favorites/favorites.component';
 import { CardCartComponent } from '../Components/card-cart/card-cart.component';
+import { ClientComponent } from '../Views/client/client.component';
 // import { SearchComponent } from '../Components/search/search.component';
 
 
@@ -39,6 +40,7 @@ import { CardCartComponent } from '../Components/card-cart/card-cart.component';
     ProductComponent,
     FavoritesComponent,
     CardCartComponent,
+    ClientComponent
     // SearchComponent
   ],
   imports: [
@@ -63,6 +65,7 @@ import { CardCartComponent } from '../Components/card-cart/card-cart.component';
     ProductComponent,
     FavoritesComponent,
     CardCartComponent,
+    ClientComponent
     // SearchComponent
   ],
   bootstrap: [AppComponent],
