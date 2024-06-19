@@ -1,18 +1,63 @@
 <div>
-    @if (ProductList.length > 0) {
-       
-            <ol class="nav-item dropdown" >
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Category
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a id="Todos" (click)="filterCategory('id')">Todos</a></li>
-                  <li><a id="Blue" (click)="filterCategory('id')">Blue</a></li>
-                  <li><a id="Grey" (click)="filterCategory('id')">Grey</a></li>
-                  <li><a id="Black" (click)="filterCategory('id')">Black</a></li>
-                  <li><a id="Classic" (click)="filterCategory('id')">Classic</a></li>
-                </ul>
-              </ol>
-        
+  @if (filteredProductList.length < 0) {
+    @for (product of ProductList; track product.id) {
+      <ul>
+        <li>
+          <app-card [product]="product"/>
+        </li>
+      </ul>
     }
+  }
+  @if (ProductList.length > 0) {
+       
+      <label for="categorySelect" (click)="filterCategory('id')">Categoría</label>
+      <select id="categorySelect">
+            <option value="Todos">Todos</option>
+            <option value="Blue">Blue</option>
+            <option value="Grey">Grey</option>
+            <option value="Black">Black</option>
+            <option value="Classic">Classic</option>
+      </select>
+            
+      <label for='sizeSelect' (click)="filterSize('id')">Talle</label>
+      <select id="sizeSelect">
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+      </select>           
+      <label for='TypeSelect' (click)="filterType('id')">Tipo</label>
+      <select id="TypeSelect">
+            <option value="Todos">Todos</option>
+            <option value="Zapatos">Zapatos</option>
+            <option value="Sandalias">Sandalias</option>
+            <option value="Ojotas">Ojotas</option>
+            <option value="Zapatillas">Zapatillas</option>
+            <option value="Borcegos">Borcegos</option>
+            <option value="Botas">Botas</option>
+      </select>  
+      <form action="">
+            <label for='minInput'>Min</label>
+            <input type="number" id="minInput" (input)="filterMin('id')">
+            <label for='maxInput'>Max</label>
+            <input type="number" id="maxInput" (input)="filterMax('id')">
+      </form> 
+      @if (filteredProductList.length > 0) {
+              
+          @for (product of filteredProductList; track product.id) {
+                <ul>
+                  <li>
+                    <app-card [product]="product"/>
+                  </li>
+                </ul>
+          }
+      } 
+  }
 </div>

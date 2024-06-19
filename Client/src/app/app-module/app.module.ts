@@ -22,6 +22,8 @@ import { UserService } from '../Services/user.service';
 import { FavoritesComponent } from '../Views/favorites/favorites.component';
 import { CardCartComponent } from '../Components/card-cart/card-cart.component';
 import { ClientComponent } from '../Views/client/client.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+
 // import { SearchComponent } from '../Components/search/search.component';
 
 
@@ -49,7 +51,7 @@ import { ClientComponent } from '../Views/client/client.component';
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule,
-    
+    HttpClientModule
   ],
   exports: [
     ProductsComponent,
@@ -69,6 +71,12 @@ import { ClientComponent } from '../Views/client/client.component';
     // SearchComponent
   ],
   bootstrap: [AppComponent],
-  providers: [FireService, ProductService, UserService]
+  providers: [
+    FireService, 
+    ProductService, 
+    UserService, 
+    provideHttpClient(
+      withFetch() 
+    )]
 })
 export class AppModuleModule { }
