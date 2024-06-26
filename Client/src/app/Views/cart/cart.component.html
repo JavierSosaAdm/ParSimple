@@ -49,6 +49,7 @@
                 <button class="button" (click)="toBuy()">Comprar</button>
                 <script>
                     const mp = new MercadoPago(publicKey.keyPublic);
+                    console.log('esto es mp: ', mp);
                 </script>
                 <button class="button" (click)="cancel()">Cancelar</button>
             </div>

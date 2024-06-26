@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit {
             this.ProductList = data
             // console.log(this.ProductList);  
           })
-     
   }
   
   navegate(product: { id: string, data: Product }): void {

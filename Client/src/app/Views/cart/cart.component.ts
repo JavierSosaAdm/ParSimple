@@ -3,11 +3,12 @@ import { MercadoPagoConfig, Payment, User } from 'mercadopago'; // Importa los e
 import { accesToken } from '../../../enviroments/enviroments'; // Importa tu token de acceso desde tus entornos
 import { CardCartComponent } from '../../Components/card-cart/card-cart.component';
 import { CartService } from '../../Services/cart.service';
-// import { Product } from '../../models/product.model';
+import { v4 as uuidv4 } from 'uuid'; 
 import { AuthService } from '../../auth/auth.service';
 import { Cart } from '../../models/cart.model';
 import { Observable } from 'rxjs';
 import { AppConfigService } from '../../Services/app-config.service';
+import { loadMercadoPago } from '@mercadopago/sdk-js';
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -78,8 +79,11 @@ export class CartComponent implements OnInit {
     this.getCarts()
     this.calculateTotal()
   }
-  async toBuy() {
+  async toBuy () {
+    // await loadMercadoPago();
+    // const mp = new MercadoPago("YOUR_PUBLIC_KEY");
     // Inicializa el objeto cliente directamente con tu token de acceso
+    
     const client = new MercadoPagoConfig({ accessToken: accesToken.token });
 
     // // Crea el objeto de pago con el cliente inicializado
@@ -87,6 +91,7 @@ export class CartComponent implements OnInit {
     
     // Define el cuerpo de la solicitud para realizar el pago
     const body = {
+      
       total_amount: this.total,
       description: this.carts.map((item) => item.products.name).join(', ').toString(),
       payment_method_id: '', // Reemplaza con el ID del método de pago
@@ -101,7 +106,7 @@ export class CartComponent implements OnInit {
     };
     // Realiza la solicitud de pago
     payment.create({ body })
-    .then(response => console.log('Respuesta de la solicitud de pago:', response))
+      .then(response => console.log('Respuesta de la solicitud de pago:', response))
       .catch(error => console.error('Error al realizar la solicitud de pago:', error));
     }
 

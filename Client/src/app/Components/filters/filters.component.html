@@ -1,5 +1,5 @@
 <div>
-  @if (filteredProductList.length < 0) {
+  <!-- @if (ProductList.length < 0) {
     @for (product of ProductList; track product.id) {
       <ul>
         <li>
@@ -7,11 +7,11 @@
         </li>
       </ul>
     }
-  }
+  } -->
   @if (ProductList.length > 0) {
        
-      <label for="categorySelect" (click)="filterCategory('id')">Categoría</label>
-      <select id="categorySelect">
+      <label for="categorySelect">Categoría</label>
+      <select id="categorySelect" (change)="filterCategory($event)">
             <option value="Todos">Todos</option>
             <option value="Blue">Blue</option>
             <option value="Grey">Grey</option>
@@ -19,8 +19,8 @@
             <option value="Classic">Classic</option>
       </select>
             
-      <label for='sizeSelect' (click)="filterSize('id')">Talle</label>
-      <select id="sizeSelect">
+      <label for='sizeSelect'>Talle</label>
+      <select id="sizeSelect" (change)="filterSize($event)">
             <option value="35">35</option>
             <option value="36">36</option>
             <option value="37">37</option>
@@ -33,8 +33,8 @@
             <option value="44">44</option>
             <option value="45">45</option>
       </select>           
-      <label for='TypeSelect' (click)="filterType('id')">Tipo</label>
-      <select id="TypeSelect">
+      <label for='TypeSelect'>Tipo</label>
+      <select id="TypeSelect" (change)="filterType($event)">
             <option value="Todos">Todos</option>
             <option value="Zapatos">Zapatos</option>
             <option value="Sandalias">Sandalias</option>
@@ -43,21 +43,25 @@
             <option value="Borcegos">Borcegos</option>
             <option value="Botas">Botas</option>
       </select>  
-      <form action="">
+      <form>
             <label for='minInput'>Min</label>
-            <input type="number" id="minInput" (input)="filterMin('id')">
+            <input type="text" id="minInput" (input)="filterMin($event)">
+
             <label for='maxInput'>Max</label>
-            <input type="number" id="maxInput" (input)="filterMax('id')">
+            <input type="text" id="maxInput" (input)="filterMax($event)">
       </form> 
-      @if (filteredProductList.length > 0) {
+      <button (click)="filter()">Filtrar</button>
+      @if (ProductList.length > 0) {
               
-          @for (product of filteredProductList; track product.id) {
+          @for (product of ProductList; track product.id) {
                 <ul>
                   <li>
                     <app-card [product]="product"/>
                   </li>
                 </ul>
           }
-      } 
+      } @else {
+        <h2>no hay productos</h2>
+      }
   }
 </div>

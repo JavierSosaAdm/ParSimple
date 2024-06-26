@@ -9,6 +9,7 @@
             <h2>No se encontraron Productos con ese nombre</h2>
         }
         @if(ProductList.length > 0) {
+            <!-- <app-filters/> -->
             @for(product of ProductList; track product.id) {
                 <ul>
                     <li>
