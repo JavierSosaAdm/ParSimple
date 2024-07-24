@@ -1,0 +1,9 @@
+<div *NgIf="ProductList">
+    <ul>
+      <li *NgFor="let item of ProductList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+        {{ item.name }}
+      </li>
+    </ul>
+</div>
+<pagination-controls (pageChange)="$event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+

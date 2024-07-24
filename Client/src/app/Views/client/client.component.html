@@ -4,14 +4,15 @@
     }
     @if (userList.length > 0) {
         @for(user of userList; track user.id) {
-            <ul>
-                <li>{{user.data.email}}</li>
-                <p>{{user.data.name}}</p>
-                <p>{{user.data.lastName}}</p>
-                <p>{{user.data.phone}}</p>
-                <p>{{user.data.address}}</p>
-            </ul>
+            <h1>Perfil de {{user.data.uid}}</h1>
+            <img src={{user.data.image}} alt="foto de usuario">
+            <button (click)="updateProfile()">Cambiar foto</button>
+            <p>Nombre: {{user.data.name}}</p>
+            <p>Apellido: {{user.data.lastName}}</p>
+            <p>Mail: {{user.data.email}}</p>
+            <p>Contraseña: {{user.data.password}}</p>
+            <p>Domicilio: {{user.data.address}}</p>
+            <p>Teléfono: {{user.data.phone}}</p>
         }
     }
-    <h1></h1>
 </div>

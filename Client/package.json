@@ -30,6 +30,7 @@
     "express": "^4.18.2",
     "firebase": "^10.11.0",
     "mercadopago": "^2.0.9",
+    "ngx-pagination": "^6.0.3",
     "paypaljs": "^1.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -23,6 +23,7 @@ import { FavoritesComponent } from '../Views/favorites/favorites.component';
 import { CardCartComponent } from '../Components/card-cart/card-cart.component';
 import { ClientComponent } from '../Views/client/client.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // import { SearchComponent } from '../Components/search/search.component';
 
@@ -51,7 +52,8 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   exports: [
     ProductsComponent,

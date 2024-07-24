@@ -36,6 +36,7 @@ export class UserService {
           return { id, data };
         }))
     );
+    
   }
   postUser(data: User): Observable<User> {
     console.log(data);
@@ -55,8 +56,12 @@ export class UserService {
     return this.users
   }
 
-  async getUserByEmail(email: string | null) {
-    // this.users
-
+  async getUserByEmail(email: string) {
+    return await this.userCollection.ref.where('email', '==', email)
+    .get()
   }
+
+  updateUser(id: string) {
+    
+  };
 }

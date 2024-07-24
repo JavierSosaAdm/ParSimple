@@ -35,4 +35,14 @@ export class AuthService implements OnInit {
   getCurrentUser() {
    return this.auth.user
   }
+
+  logOut() {
+    return this.auth.signOut().then(() => {
+      this.router.navigate(['']);
+      
+    }).catch((error) => {
+      console.error('Error al desloguearse:', error);
+    })
+  }
+  
 }

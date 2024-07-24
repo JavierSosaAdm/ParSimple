@@ -8,12 +8,13 @@ import { CardComponent } from '../../Components/card/card.component'
 import { FormsModule } from '@angular/forms';
 import { CardsComponent } from '../../Components/cards/cards.component';
 import { FiltersComponent } from '../../Components/filters/filters.component';
+import { PaginationComponent } from '../../Components/pagination/pagination.component';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, CardComponent, FiltersComponent],
+  imports: [CommonModule, FormsModule, CardComponent, PaginationComponent, FiltersComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -26,6 +27,7 @@ export class ProductsComponent implements OnInit {
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
   
+ 
   
   ngOnInit(): void {
     this._fireService.getProductsFire().subscribe((data) => {

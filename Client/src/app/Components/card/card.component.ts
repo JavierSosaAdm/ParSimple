@@ -8,6 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from '../../Services/cart.service';
 import { FavoritesService } from '../../Services/favorites.service';
 import { Cart } from '../../models/cart.model';
+import { AuthService } from '../../auth/auth.service';
+
 
 
 
@@ -30,7 +32,8 @@ export class CardComponent implements OnInit {
   private _favService = inject(FavoritesService);
   public sanitizer = inject(DomSanitizer);
   menuSelected: string = '';
-  
+  private _authService = inject(AuthService)
+  private current: string | undefined = '';
   
   verDetail(): void {
     if (this.product && this.product.id) {
@@ -46,25 +49,44 @@ export class CardComponent implements OnInit {
   addCart(): void {
     let price = this.product?.data.price;
     let quantity = 1;
-    if (this.product && this.product.id) {
-      let data: Cart = {
-        id_Cart: this.product.id,
-        products: this.product.data,
-        product_quantity: quantity,
-        total_price: price ? price * quantity : 0
+
+    
+    console.log('este es el current: -->', this.current);
+    if (this.current !== '' && this.current !== undefined) {
+      
+      if (this.product && this.product.id) {
+        let data: Cart = {
+          id_Cart: this.product.id,
+          products: this.product.data,
+          product_quantity: quantity,
+          total_price: price ? price * quantity : 0
+        }
+          this._cartService.addProdCart(data)   
+      } else {
+        console.log('no hay producto en el carrito');
       }
-      this._cartService.addProdCart(data)   
     } else {
-      console.log('no hay producto en el carrito');
+      this._router.navigate(['login'])
     }
   }
+
   
   addFav(): void {
-    this.product ? this._favService.addFav(this.product.data) : console.error('No favorites');
+   
+    if (this.current !== '' && this.current !== undefined) {
+      this.product ? this._favService.addFav(this.product.data) : console.error('No favorites');
+    } else {
+      this._router.navigate(['login'])
+    }
   };
     
   ngOnInit(): void { 
-    // console.log('producto de la card:', this.product);
+    this._authService.getCurrentUser().subscribe((data) => {
+      if (data) {
+        this.current = data.email?.toString()
+        console.log('esto es current: -->', this.current);
+      }
+    })
   }
 }
 

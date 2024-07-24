@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   firebaseService = inject(AuthService);
   private _router = inject(Router);
+  private auth = inject(AuthService);
   loginForm!: FormGroup;
 
   constructor(private FormBuilder: FormBuilder) {
@@ -44,6 +45,10 @@ export class LoginComponent implements OnInit {
     
   }
 
+  logOut() {
+    this.auth.logOut();
+    
+  }
   hasErrors(field: string, typeError: string) {
     return this.loginForm.get(field)?.hasError(typeError) && this.loginForm.get(field)?.touched;
   }

@@ -3,10 +3,12 @@ import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../auth/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, NgClass } from '@angular/common';
 @Component({
   selector: 'app-client',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, NgClass, CommonModule],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css'
 })
@@ -31,6 +33,10 @@ export class ClientComponent implements OnInit {
       console.log('esto es lista de user: ', this.userList);
     })
   };
+
+  updateProfile() {
+    this._userService.updateUser('id')
+  }
   ngOnInit(): void {
     this.listaDeUsuarios();
   }

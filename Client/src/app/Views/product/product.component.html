@@ -9,15 +9,18 @@
             <h2>No se encontraron Productos con ese nombre</h2>
         }
         @if(ProductList.length > 0) {
-            <!-- <app-filters/> -->
-            @for(product of ProductList; track product.id) {
-                <ul>
-                    <li>
-                        <app-card [product]="product"/>
-                    </li>
-                </ul>
-            }
+            <div>
+                @for(product of ProductList; track product.id) {
+                    <ul>
+                        <li>
+                            <app-card [product]="product"/>
+                        </li>
+                    </ul>
+                }
+            </div>
+            <app-filters />
+            <app-pagination />
         }     
-        <app-filters/>
+        
     </div>
 </div>
