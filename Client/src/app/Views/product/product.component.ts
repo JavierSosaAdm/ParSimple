@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { CardsComponent } from '../../Components/cards/cards.component';
 import { FiltersComponent } from '../../Components/filters/filters.component';
 import { PaginationComponent } from '../../Components/pagination/pagination.component';
+import { FilterService } from '../../Services/filter.service';
 
 
 @Component({
@@ -26,12 +27,14 @@ export class ProductsComponent implements OnInit {
   private _fireService = inject(FireService)
   private _ProductService = inject(ProductService);
   private _router = inject(Router);
-  
+  private _filter = inject(FilterService);
+  productList$ = this._filter.productList$;
  
   
   ngOnInit(): void {
-    this._fireService.getProductsFire().subscribe((data) => {
+    this._fireService.getProductsFire().subscribe(async(data) => {
             this.ProductList = data
+            await this._filter.filter();
             // console.log(this.ProductList);  
           })
   }
@@ -62,5 +65,28 @@ export class ProductsComponent implements OnInit {
       });
     }
   }
+ // FILTROS
+ filterCategory(event: Event) {
+  this._filter.filterCategory(event)
+ }
 
+ filterSize(event: Event) {
+  this._filter.filterSize(event)
+ }
+
+ filterType(event: Event) {
+  this._filter.filterType(event)
+ }
+
+ filterMin(event: Event) {
+  this._filter.filterMin(event)
+ }
+
+ filterMax(event: Event) {
+  this._filter.filterMax(event)
+ }
+
+ filter() {
+  this.ProductList = this._filter.filter()
+ }
 }
