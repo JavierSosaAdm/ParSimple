@@ -10,6 +10,7 @@ import { CardsComponent } from '../../Components/cards/cards.component';
 import { FiltersComponent } from '../../Components/filters/filters.component';
 import { PaginationComponent } from '../../Components/pagination/pagination.component';
 import { FilterService } from '../../Services/filter.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Component({
@@ -20,8 +21,6 @@ import { FilterService } from '../../Services/filter.service';
   styleUrl: './product.component.css'
 })
 export class ProductsComponent implements OnInit {
-  ProductList: { id: string, data: Product}[] = [];
-  searchName: string = '';
   
   
   private _fireService = inject(FireService)
@@ -29,13 +28,17 @@ export class ProductsComponent implements OnInit {
   private _router = inject(Router);
   private _filter = inject(FilterService);
   productList$ = this._filter.productList$;
- 
+  
+  ProductList: { id: string, data: Product}[] = [];
+  searchName: string = '';
   
   ngOnInit(): void {
-    this._fireService.getProductsFire().subscribe(async(data) => {
+    this._fireService.getProductsFire().subscribe((data) => {
             this.ProductList = data
-            await this._filter.filter();
-            // console.log(this.ProductList);  
+            this._filter.filter();
+            console.log('que es este observable?', this.productList$);
+            
+            console.log('ProductList en OnInit: ',this.ProductList);  
           })
   }
   
@@ -88,5 +91,7 @@ export class ProductsComponent implements OnInit {
 
  filter() {
   this.ProductList = this._filter.filter()
+  console.log('este es el resultado de la funcion filter: ', this.ProductList);
+  
  }
 }

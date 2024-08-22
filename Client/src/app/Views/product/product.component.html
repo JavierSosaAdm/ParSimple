@@ -5,8 +5,7 @@
     </form>
     
     <div class="ProductList">
-        @if (ProductList.length > 0) {
-       
+        <div class="filter">
             <label for="categorySelect">Categoría</label>
             <select id="categorySelect" (change)="filterCategory($event)">
                   <option value="Todos">Todos</option>
@@ -41,13 +40,18 @@
                   <option value="Botas">Botas</option>
             </select>  
             <form>
-                  <label for='minInput'>Min</label>
-                  <input type="text" id="minInput" (input)="filterMin($event)">
-      
-                  <label for='maxInput'>Max</label>
-                  <input type="text" id="maxInput" (input)="filterMax($event)">
+                <div>
+                    <label for='minInput'>Min</label>
+                    <input type="text" id="minInput" (input)="filterMin($event)">
+                </div>
+                <div>
+                    <label for='maxInput'>Max</label>
+                    <input type="text" id="maxInput" (input)="filterMax($event)">
+                </div>
             </form> 
             <button (click)="filter()">Filtrar</button>
+        </div>           
+        <div class="Product">
             @if (ProductList.length > 0) {
                     
                 @for (product of ProductList; track product.id) {
@@ -58,9 +62,12 @@
                       </ul>
                 }
             } @else {
+                
               <h2>no hay productos</h2>
             }
-        }
+        </div>
+            
+        
         <!-- @if(ProductList.length === 0) {
             <h2>No se encontraron Productos con ese nombre</h2>
         }
