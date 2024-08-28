@@ -59,31 +59,14 @@
                         <li>
                           <app-card [product]="product"/>
                         </li>
-                      </ul>
+                      </ul>   
+                    }
+                } @else {
+                    <h2>no hay productos</h2>
                 }
-            } @else {
-                
-              <h2>no hay productos</h2>
-            }
+                <button (click)="changePage(page - 1)" [disabled]="(currentPage$ | async) === 1">Anterior</button>
+                  <p>pagina: {{page}}</p>  
+                <button (click)="changePage(page + 1)" [disabled]="page === totalPage">Siguiente</button>
         </div>
-            
-        
-        <!-- @if(ProductList.length === 0) {
-            <h2>No se encontraron Productos con ese nombre</h2>
-        }
-        @if(ProductList.length > 0) {
-            <div>
-                @for(product of ProductList; track product.id) {
-                    <ul>
-                        <li>
-                            <app-card [product]="product"/>
-                        </li>
-                    </ul>
-                }
-            </div>
-             <app-filters />
-            <app-pagination /> 
-        }      -->
-        
     </div>
 </div>
