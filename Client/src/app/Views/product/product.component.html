@@ -1,8 +1,10 @@
 <div class="container">
-    <form (ngSubmit)="searchProduct(searchName)">
-        <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
-        <button type="submit">Buscar</button>
-    </form>
+    <div class="search">
+        <form (ngSubmit)="searchProduct(searchName)" >
+            <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
     
     <div class="ProductList">
         <div class="filter">
@@ -50,23 +52,27 @@
                 </div>
             </form> 
             <button (click)="filter()">Filtrar</button>
-        </div>           
+        </div>
         <div class="Product">
-            @if (ProductList.length > 0) {
+            <div class="listProd">
+                @if (ProductList.length > 0) {
                     
-                @for (product of ProductList; track product.id) {
-                      <ul>
-                        <li>
-                          <app-card [product]="product"/>
-                        </li>
-                      </ul>   
+                    @for (product of ProductList; track product.id) {
+                          <ul>
+                            <li>
+                              <app-card [product]="product"/>
+                            </li>
+                          </ul>   
+                        }
+                    } @else {
+                        <h2>no hay productos</h2>
                     }
-                } @else {
-                    <h2>no hay productos</h2>
-                }
+            </div>
+            <div class="paginated">
                 <button (click)="changePage(page - 1)" [disabled]="(currentPage$ | async) === 1">Anterior</button>
-                  <p>pagina: {{page}}</p>  
-                <button (click)="changePage(page + 1)" [disabled]="page === totalPage">Siguiente</button>
+                <p>pagina: {{page}}</p>  
+                <button (click)="changePage(page + 1)" [disabled]="page === totalPage">Siguiente</button>           
+            </div>
         </div>
     </div>
 </div>

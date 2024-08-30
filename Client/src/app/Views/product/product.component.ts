@@ -1,16 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { FireService } from '../../Services/fire.service';
 import { Product } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { CardComponent } from '../../Components/card/card.component'
 import { FormsModule } from '@angular/forms';
-// import { CardsComponent } from '../../Components/cards/cards.component';
-// import { FiltersComponent } from '../../Components/filters/filters.component';
-// import { PaginationComponent } from '../../Components/pagination/pagination.component';
+
 import { FilterService } from '../../Services/filter.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { PaginateService } from '../../Services/paginate.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -25,9 +23,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class ProductsComponent implements OnInit {
   
-  private _fireService = inject(FireService)
+  private _fireService = inject(FireService);
   private _ProductService = inject(ProductService);
-  private _PaginateService = inject(PaginateService)
+  private _PaginateService = inject(PaginateService);
   private _router = inject(Router);
   private _filter = inject(FilterService);
   productList$ = this._filter.productList$;
@@ -44,23 +42,17 @@ export class ProductsComponent implements OnInit {
   currentPage$ = this._PaginateService.currentPage$;
   itemsPerPage$ = this._PaginateService.itemsPerPage$;
   totalItems$ = this._PaginateService.totalItems$;
-  totalPages$ = this._PaginateService._totalPages
+  totalPages$ = this._PaginateService._totalPages;
 
-  // isNextDisabled: boolean = false;
-  // isPreviousDisabled: boolean = true;
-
+  
   ngOnInit (): void {
-    this._PaginateService.paginate();
-    this._fireService.getProductsFire().subscribe((data) => {
+    this._fireService.getProductsFire().subscribe((data) => { // Solicitud de productos
       this.ProductList = data
       this._filter.filter(); 
-      this._PaginateService.setTotalItems(data.length);
-      this._PaginateService.getPaginatedData().subscribe(paginatedData => {
-        console.log('esto es pagination data', paginatedData);              
-        this.paginatedProducts = paginatedData; // Ejemplo de uso
-        this.ProductList = this.paginatedProducts;
-        // this.updateButtonStates();
-        console.log('esto es productos despues de paginado', this.paginatedProducts);              
+      this._PaginateService.setTotalItems(data.length, this.ProductList); // Se setea los prod del paginado
+      this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se realiza el paginado               
+        this.paginatedProducts = paginatedData; // 
+        this.ProductList = this.paginatedProducts;             
       });
     })
   };
@@ -77,17 +69,17 @@ export class ProductsComponent implements OnInit {
   
   searchProduct(searchName: string): void {
     if (searchName) {
-      this._ProductService.getProductByNameFire(searchName).subscribe((products) => {
-        this.ProductList = products.filter((product) => product.id !== '');
-        // console.log('esto es products', products);
-        
-        // console.log('esto es lista de productos', this.ProductList);
-        
+      this._ProductService.getProductByNameFire(searchName).subscribe(async (products) => { 
+        this.ProductList = await products.filter((product) => product.id !== ''); // Se filtra por id con el nombre de parametro
+        this._PaginateService.setTotalItems(this.ProductList.length, this.ProductList); // Se setea los prod del paginado otra vez
+        this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se vuelve a paginar pero ya con los valores actuales despues de la busqueda            
+          this.paginatedProducts = paginatedData; 
+          this.ProductList = this.paginatedProducts;             
+        });  
       });
     } else {
       this._fireService.getProductsFire().subscribe((data) => {
-        this.ProductList = data
-        // console.log(this.ProductList);  
+        this.ProductList = data 
       });
     }
   };
@@ -112,23 +104,18 @@ export class ProductsComponent implements OnInit {
   this._filter.filterMax(event)
  };
 
- filter() {
-  this.ProductList = this._filter.filter()
+ async filter () {
+  this.ProductList = await this._filter.filter()
+  this._PaginateService.setTotalItems(this.paginatedProducts.length, this.ProductList);
+  this._PaginateService.getPaginatedData().subscribe(paginatedData => {
+    console.log('esto es pagination data', paginatedData);              
+    this.paginatedProducts = paginatedData; // Ejemplo de uso
+    this.ProductList = this.paginatedProducts;             
+  });
  };
 
- 
- 
  changePage(page: number) {
    this._PaginateService.setCurrentPage(page);
    this.page = page;
-  //  this.updateButtonStates()
-   console.log("esto es currentPage: ", page);
-  }
-
-  // updateButtonStates() {
-  //   this.currentPage$.subscribe(currentPage => {
-  //     this.isPreviousDisabled = currentPage === 1;
-  //     this.isNextDisabled = currentPage === this._PaginateService.totalPages;
-  //   })
-  // };
-}
+  };
+};

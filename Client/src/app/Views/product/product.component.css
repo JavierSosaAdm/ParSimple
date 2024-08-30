@@ -5,10 +5,10 @@
 }
 
 .ProductList {
-    flex: 4;
+    flex: 5;
     display: flex;
-    flex-wrap:wrap;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .filter {
@@ -19,6 +19,23 @@
 }
 
 .Product {
-    flex: 3;
+    display: flex;
+    flex: 4;
     margin: 1rem;
+    flex-direction: column;
+}
+
+.listProd {
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.paginated {
+    display: flex;
+    flex-direction: row;
 }
