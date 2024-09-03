@@ -9,6 +9,7 @@ export interface Product {
     category:       string;
     type:           string;
     stock_quantity: null;
+    quantity:       number;
     is_Delete:      boolean;
     image:          string;
     id_category:    null;

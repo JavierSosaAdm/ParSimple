@@ -1,1 +1,61 @@
-<p>cart works!</p>
+<div class="resumeTitle">
+    <h3 class="title">Resumen de compra</h3>
+</div>
+<section class="container">
+    <div class="cart-prod">
+        <div >   
+            <div>  
+              @for (item of carts; track carts) {
+                <h5 class="title">{{item.products.name}}</h5>
+                <img class="img" src="{{item.products.image}}" alt="Imagen del producto">
+                <!-- <p>este es el id: {{item.id_Cart}}</p> -->
+              <div>
+                <button type="submit" (click)="decrement(item)" class="btn btn-primary">-</button>
+                <button type="submit" (click)="increment(item)" class="btn btn-primary">+</button>
+              </div>
+              
+              <div>
+                <button (click)="removeProduct(item.id_Cart)">boton de borrar</button>
+              </div>
+              }
+            </div>
+        </div>
+    </div>
+    <aside class="resumeCont">
+        <div class="resumeCont">
+            <div class="payment">
+            <div class="paymentInfo">
+                <div class="itemsCont">
+                    <h6>Tus compras</h6>
+                    <ul>
+                        <li>
+                            @for(item of carts; track carts) {
+                                <p class="prod">Producto: {{ item.products.name }}</p>
+                                <p>Unidades: {{item.product_quantity}}</p>
+                                <p class="subTotal">Sub-Total: ${{item.total_price}}</p>
+                            } @empty {
+                                <p class="prod">Producto:</p>
+                                <p class="total">Total: $0 </p>
+                            }
+                        </li>  
+                    </ul>
+                </div>
+                <div>
+                    <p>TOTAL: </p>
+                    <p>${{this.total}}</p>
+                </div>
+            </div>  
+            <div>
+                <button class="button" (click)="toBuy()">Comprar</button>
+                <script>
+                    const mp = new MercadoPago(publicKey.keyPublic);
+                    console.log('esto es mp: ', mp);
+                </script>
+                <button class="button" (click)="cancel()">Cancelar</button>
+            </div>
+            </div>
+            <p>aqui va spin</p>
+            <p>aqui va la wallet</p>
+        </div>
+    </aside>
+</section>

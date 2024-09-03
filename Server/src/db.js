@@ -25,6 +25,12 @@ const dataBase = new Sequelize(
     { logging : false }
 )
 
+// ACTIVAR ESTA SECCIÓN CUANDO QUIERES TRABAJAR CON LA BD DEPLOYADA
+// const dataBase=new Sequelize( 
+//   `${DB_SERVER_DEPLOY}`,
+//   {logging:false, dialectOptions:{ssl:{require:true}}}
+// )
+
 userModel(dataBase);
 productModel(dataBase);
 cartModel(dataBase);

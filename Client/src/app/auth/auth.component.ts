@@ -14,6 +14,8 @@ import { User } from '../models/user.model';
 export class AuthComponent implements OnInit {
   firebaseService = inject(AuthService);
   authForm!: FormGroup;
+  public login = this.authForm
+
   
   constructor(private FormBuilder: FormBuilder) {
     this.authForm = this.FormBuilder.group({
@@ -24,6 +26,7 @@ export class AuthComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
 
   async submit() {

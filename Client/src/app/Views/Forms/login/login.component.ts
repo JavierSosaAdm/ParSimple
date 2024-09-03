@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   firebaseService = inject(AuthService);
   private _router = inject(Router);
+  private auth = inject(AuthService);
   loginForm!: FormGroup;
 
   constructor(private FormBuilder: FormBuilder) {
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
       event.preventDefault();
       this.firebaseService.singIn(this.loginForm.value as User)
       .then(resp => {
-        console.log('___', resp);
+        console.log('___', resp.user.email);
         this._router.navigate(['/']); // redirección a home page
       })
       .catch(error => {
@@ -41,9 +42,13 @@ export class LoginComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    console.log('esto es el login');
+    
   }
 
+  logOut() {
+    this.auth.logOut();
+    
+  }
   hasErrors(field: string, typeError: string) {
     return this.loginForm.get(field)?.hasError(typeError) && this.loginForm.get(field)?.touched;
   }

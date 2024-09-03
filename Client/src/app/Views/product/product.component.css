@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.ProductList {
+    flex: 5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filter {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 1rem;
+}
+
+.Product {
+    display: flex;
+    flex: 4;
+    margin: 1rem;
+    flex-direction: column;
+}
+
+.listProd {
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.paginated {
+    display: flex;
+    flex-direction: row;
+}

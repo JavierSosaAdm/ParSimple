@@ -41,35 +41,34 @@ export class ProductService {
     return this._http.get<Product>(`${this.baseURL}/products/${id}`);
  }
  
- getProductsByName(name: string): Observable<Product[]> {
+  getProductsByName(name: string): Observable<Product[]> {
     return this._http.get<Product[]>(`${this.baseURL}/products?name=${name}`);
- }
+  }
 
- getProductByNameFire(name: string): Observable<{ id: string; data: Product; }[]> {
-  return this.productCollection.snapshotChanges().pipe(
-    
-    map((actions: DocumentChangeAction<Product>[]) =>
-      actions.map((a) => {
-        const { payload } = a;
-        const data = payload.doc.data() as Product;
-        const id = payload.doc.id;
+  getProductByNameFire(name: string): Observable<{ id: string; data: Product;}[]> {
+    return this.productCollection.snapshotChanges().pipe(
+      map((actions: DocumentChangeAction<Product>[]) =>
+        actions.map((a) => {
+          const { payload } = a;
+          const data = payload.doc.data() as Product;
+          const id = payload.doc.id;
 
-        // Filtrar por nombre
-        if (data.name.toLowerCase().includes(name.toLowerCase())) {
-          return { id, data };
-        } else {
-          return { id: '', data }; // Excluir productos que no coincidan con el nombre
-        }
-      })
-      .filter((product) => product !== undefined) // Eliminar elementos nulos
-    )
+          // Filtrar por nombre
+          if (data.name.toLowerCase().includes(name.toLowerCase())) {
+            return { id, data };
+          } else {
+            return { id: '', data }; // Excluir productos que no coincidan con el nombre
+          }
+        })
+        .filter((product) => product !== undefined) // Eliminar elementos nulos
+      )
   
-  );   
- }
+    );   
+  }
 
- postProduct(data: Product): Observable<Product> {
+  postProduct(data: Product): Observable<Product> {
    console.log(data);
     return this._http.post<Product>(`${this.baseURL}/products`, data);
- }
+  }
  
 }

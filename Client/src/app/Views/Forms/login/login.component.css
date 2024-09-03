@@ -1,2 +1,18 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4.5rem;
+    background-color: rgba(0, 0, 0, 0.276);
+    width: 75vh;
+    height: 50vh;
+    border-radius: 10px;
+}
+
+.Title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
   

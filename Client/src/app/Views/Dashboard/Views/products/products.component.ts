@@ -87,7 +87,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('esto es el formulario de creacion de prodctos');
+    
   }
 
   onFileSelected(event: any): void {

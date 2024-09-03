@@ -19,9 +19,13 @@ import { enviroment } from '../../../enviroment.prod';
 import { FireService } from '../Services/fire.service';
 import { ProductService } from '../Services/product.service';
 import { UserService } from '../Services/user.service';
-import { CloudinaryModule } from '@cloudinary/ng';
-import { cloudinaryConfig } from '../../../cloudinary.config';
+import { FavoritesComponent } from '../Views/favorites/favorites.component';
+import { CardCartComponent } from '../Components/card-cart/card-cart.component';
+import { ClientComponent } from '../Views/client/client.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
+// import { SearchComponent } from '../Components/search/search.component';
 
 
 @NgModule({
@@ -36,7 +40,11 @@ import { cloudinaryConfig } from '../../../cloudinary.config';
     ClientsComponent,
     OrdersComponent,
     PaymentsComponent,
-    ProductComponent
+    ProductComponent,
+    FavoritesComponent,
+    CardCartComponent,
+    ClientComponent
+    // SearchComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +52,8 @@ import { cloudinaryConfig } from '../../../cloudinary.config';
     FormsModule,
     AngularFireModule.initializeApp(enviroment.firebaseConfig),
     AngularFireStorageModule,
-    CloudinaryModule.forRoot(cloudinaryConfig)
+    HttpClientModule,
+    NgxPaginationModule
   ],
   exports: [
     ProductsComponent,
@@ -58,9 +67,18 @@ import { cloudinaryConfig } from '../../../cloudinary.config';
     OrdersComponent,
     PaymentsComponent,
     ProductComponent,
-    
+    FavoritesComponent,
+    CardCartComponent,
+    ClientComponent
+    // SearchComponent
   ],
   bootstrap: [AppComponent],
-  providers: [FireService, ProductService, UserService]
+  providers: [
+    FireService, 
+    ProductService, 
+    UserService, 
+    provideHttpClient(
+      withFetch() 
+    )]
 })
 export class AppModuleModule { }

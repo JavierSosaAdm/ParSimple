@@ -1,7 +1,7 @@
 <div class="general-styles">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar scroll</a>
+      <a class="navbar-brand" href="#">Par Simple</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -26,6 +26,9 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="about" [ngClass]="{active: menuSelected == 'about'}" (click)="onOption('about')">Conócenos</a></li>
               <li><a class="dropdown-item" routerLink="productsdashboard" [ngClass]="{active: menuSelected == 'productsdashboard'}">Productos</a></li>
+              <li><a class="dropdown-item" routerLink="favorites" [ngClass]="{active: menuSelected == 'favorites'}">Mis Favoritos</a></li>
+              <li><a class="dropdown-item" routerLink="clients" [ngClass]="{active: menuSelected == 'clients'}">ClientesDashboard</a></li>
+              <li><a class="dropdown-item" routerLink="client" [ngClass]="{active: menuSelected == 'client'}">Clientes</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>

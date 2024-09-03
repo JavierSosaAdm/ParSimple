@@ -1,3 +1,6 @@
+require("dotenv").config(); 
+const { URL_FRONT } = process.env;
+const mercadopago = require("mercadopago")
 const {
     getAllProductController,
     getProductByIDController,
@@ -85,12 +88,46 @@ const postProduct = async (req, res) => {
     }
 };
 
+const createPreference = async (req, res) => {
+    mercadopago.configure({
+        access_token: "TEST-175874241100805-050815-a3242323713da8a5666799071a319883-1501134427"
+    })
+
+    const {description, price, quantity, uid}=req.body
+    let preference = {
+        items:[
+            {
+                title: description,
+                unit_price: Number(price),
+				quantity: quantity,
+            }
+        ],
+        back_urls: {
+			"success": `${URL_FRONT}`,
+			"failure": `${URL_FRONT}`,
+			"pending": `${URL_FRONT}`
+		},
+        external_reference:`${uid}`,
+		auto_return: "approved",
+    };
+    mercadopago.preferences.create(preference)
+    .then(function(response) {
+        res.json({
+            id: response.body.id
+        });
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+};
+
 module.exports = {
     getAllProduct,
     getProductByID,
     putProduct,
     deleteProduct,
-    postProduct
+    postProduct,
+    createPreference
 };
 
 

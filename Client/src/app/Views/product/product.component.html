@@ -1,15 +1,78 @@
 <div class="container">
-    <form (ngSubmit)="searchProduct(searchName)">
-        <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
-        <button type="submit">Buscar</button>
-    </form>
-    @if(ProductList.length === 0) {
-            <h2>No se encontraron Productos con ese nombre</h2>
-    }
-    @if(ProductList.length > 0) {
-        @for(product of ProductList; track product.id) {
-            <app-card *ngFor="let product of ProductList" [product]="product"/>
-        }
-    }
+    <div class="search">
+        <form (ngSubmit)="searchProduct(searchName)" >
+            <input type="text" [(ngModel)]="searchName"  placeholder="Buscar producto por nombre" name="search">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
     
+    <div class="ProductList">
+        <div class="filter">
+            <label for="categorySelect">Categoría</label>
+            <select id="categorySelect" (change)="filterCategory($event)">
+                  <option value="Todos">Todos</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Grey">Grey</option>
+                  <option value="Black">Black</option>
+                  <option value="Classic">Classic</option>
+            </select>
+                  
+            <label for='sizeSelect'>Talle</label>
+            <select id="sizeSelect" (change)="filterSize($event)">
+                  <option value="35">35</option>
+                  <option value="36">36</option>
+                  <option value="37">37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                  <option value="41">41</option>
+                  <option value="42">42</option>
+                  <option value="43">43</option>
+                  <option value="44">44</option>
+                  <option value="45">45</option>
+            </select>           
+            <label for='TypeSelect'>Tipo</label>
+            <select id="TypeSelect" (change)="filterType($event)">
+                  <option value="Todos">Todos</option>
+                  <option value="Zapatos">Zapatos</option>
+                  <option value="Sandalias">Sandalias</option>
+                  <option value="Ojotas">Ojotas</option>
+                  <option value="Zapatillas">Zapatillas</option>
+                  <option value="Borcegos">Borcegos</option>
+                  <option value="Botas">Botas</option>
+            </select>  
+            <form>
+                <div>
+                    <label for='minInput'>Min</label>
+                    <input type="text" id="minInput" (input)="filterMin($event)">
+                </div>
+                <div>
+                    <label for='maxInput'>Max</label>
+                    <input type="text" id="maxInput" (input)="filterMax($event)">
+                </div>
+            </form> 
+            <button (click)="filter()">Filtrar</button>
+        </div>
+        <div class="Product">
+            <div class="listProd">
+                @if (ProductList.length > 0) {
+                    
+                    @for (product of ProductList; track product.id) {
+                          <ul>
+                            <li>
+                              <app-card [product]="product"/>
+                            </li>
+                          </ul>   
+                        }
+                    } @else {
+                        <h2>no hay productos</h2>
+                    }
+            </div>
+            <div class="paginated">
+                <button (click)="changePage(page - 1)" [disabled]="(currentPage$ | async) === 1">Anterior</button>
+                <p>pagina: {{page}}</p>  
+                <button (click)="changePage(page + 1)" [disabled]="page === totalPage">Siguiente</button>           
+            </div>
+        </div>
+    </div>
 </div>

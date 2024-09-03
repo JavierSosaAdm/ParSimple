@@ -1,0 +1,67 @@
+<div>
+  <!-- @if (ProductList.length < 0) {
+    @for (product of ProductList; track product.id) {
+      <ul>
+        <li>
+          <app-card [product]="product"/>
+        </li>
+      </ul>
+    }
+  } -->
+  @if (ProductList.length > 0) {
+       
+      <label for="categorySelect">Categoría</label>
+      <select id="categorySelect" (change)="filterCategory($event)">
+            <option value="Todos">Todos</option>
+            <option value="Blue">Blue</option>
+            <option value="Grey">Grey</option>
+            <option value="Black">Black</option>
+            <option value="Classic">Classic</option>
+      </select>
+            
+      <label for='sizeSelect'>Talle</label>
+      <select id="sizeSelect" (change)="filterSize($event)">
+            <option value="35">35</option>
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+            <option value="43">43</option>
+            <option value="44">44</option>
+            <option value="45">45</option>
+      </select>           
+      <label for='TypeSelect'>Tipo</label>
+      <select id="TypeSelect" (change)="filterType($event)">
+            <option value="Todos">Todos</option>
+            <option value="Zapatos">Zapatos</option>
+            <option value="Sandalias">Sandalias</option>
+            <option value="Ojotas">Ojotas</option>
+            <option value="Zapatillas">Zapatillas</option>
+            <option value="Borcegos">Borcegos</option>
+            <option value="Botas">Botas</option>
+      </select>  
+      <form>
+            <label for='minInput'>Min</label>
+            <input type="text" id="minInput" (input)="filterMin($event)">
+
+            <label for='maxInput'>Max</label>
+            <input type="text" id="maxInput" (input)="filterMax($event)">
+      </form> 
+      <button (click)="filter()">Filtrar</button>
+      @if (ProductList.length > 0) {
+              
+          @for (product of ProductList; track product.id) {
+                <ul>
+                  <li>
+                    <app-card [product]="product"/>
+                  </li>
+                </ul>
+          }
+      } @else {
+        <h2>no hay productos</h2>
+      }
+  }
+</div>
