@@ -79,7 +79,12 @@ export class ProductsComponent implements OnInit {
       });
     } else {
       this._fireService.getProductsFire().subscribe((data) => {
-        this.ProductList = data 
+        this.ProductList = data;
+        this._PaginateService.setTotalItems(this.ProductList.length, this.ProductList); // Se setea los prod del paginado otra vez
+        this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se vuelve a paginar pero ya con los valores actuales despues de la busqueda            
+          this.paginatedProducts = paginatedData; 
+          this.ProductList = this.paginatedProducts;             
+        });  
       });
     }
   };
