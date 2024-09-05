@@ -3,5 +3,8 @@
     "@angular/common": "^17.3.4",
     "@mercadopago/sdk-js": "^0.0.3",
     "mercadopago": "^2.0.9"
+  },
+  "scripts": {
+    "build": "ng build"
   }
 }
