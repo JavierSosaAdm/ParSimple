@@ -48,6 +48,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit (): void {
     this._fireService.getProductsFire().subscribe((data) => { // Solicitud de productos
       this.ProductList = data
+      console.log('productos listos: ', this.ProductList);
       this._filter.filter(); 
       this._PaginateService.setTotalItems(data.length, this.ProductList); // Se setea los prod del paginado
       this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se realiza el paginado               
@@ -71,6 +72,7 @@ export class ProductsComponent implements OnInit {
     if (searchName) {
       this._ProductService.getProductByNameFire(searchName).subscribe(async (products) => { 
         this.ProductList = await products.filter((product) => product.id !== ''); // Se filtra por id con el nombre de parametro
+        console.log('productos listos: ', this.ProductList);
         this._PaginateService.setTotalItems(this.ProductList.length, this.ProductList); // Se setea los prod del paginado otra vez
         this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se vuelve a paginar pero ya con los valores actuales despues de la busqueda            
           this.paginatedProducts = paginatedData; 
@@ -87,6 +89,8 @@ export class ProductsComponent implements OnInit {
         });  
       });
     }
+    console.log('productos listos: ', this.ProductList);
+    
   };
  // FILTROS
  filterCategory(event: Event) {
