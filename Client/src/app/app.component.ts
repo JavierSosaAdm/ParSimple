@@ -13,7 +13,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Par Simple';
+  title = 'client';
   menuSelected: string = '';
 
   
