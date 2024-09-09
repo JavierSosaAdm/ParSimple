@@ -49,6 +49,7 @@ export class ProductsComponent implements OnInit {
     this._fireService.getProductsFire().subscribe((data) => { // Solicitud de productos
       this.ProductList = data
       console.log('productos listos: ', this.ProductList);
+      console.log('productos listos: ', this.ProductList);
       this._filter.filter(); 
       this._PaginateService.setTotalItems(data.length, this.ProductList); // Se setea los prod del paginado
       this._PaginateService.getPaginatedData().subscribe(paginatedData => { // se realiza el paginado               
