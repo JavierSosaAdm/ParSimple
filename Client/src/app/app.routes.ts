@@ -14,7 +14,7 @@ import { FavoritesComponent } from './Views/favorites/favorites.component';
 import { ClientComponent } from './Views/client/client.component';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
+    {path: './', component: HomeComponent},
     {path: 'products', component: ProductsComponent},
     {path: 'products/:id', component: DetailComponent},
     {path: 'login', component: LoginComponent},
