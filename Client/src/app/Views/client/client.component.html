@@ -6,7 +6,19 @@
         @for(user of userList; track user.id) {
             <h1>Perfil de {{user.data.uid}}</h1>
             <img src={{user.data.image}} alt="foto de usuario">
-            <button (click)="updateProfile()">Cambiar foto</button>
+            <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="updateProfile()">
+                <div class="input-group mb-3">
+                    <input 
+                      type="file" 
+                      class="form-control" 
+                      id="image" 
+                      formControlName="image"
+                      (change)="onFileSelected($event)"
+                      >
+                    <label class="input-group-text" for="image">Subir</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Cambiar foto</button>
+            </form>
             <p>Nombre: {{user.data.name}}</p>
             <p>Apellido: {{user.data.lastName}}</p>
             <p>Mail: {{user.data.email}}</p>

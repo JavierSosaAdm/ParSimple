@@ -25,7 +25,7 @@ import { ClientComponent } from '../Views/client/client.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-// import { SearchComponent } from '../Components/search/search.component';
+
 
 
 @NgModule({
@@ -44,7 +44,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FavoritesComponent,
     CardCartComponent,
     ClientComponent
-    // SearchComponent
+    
   ],
   imports: [
     CommonModule,

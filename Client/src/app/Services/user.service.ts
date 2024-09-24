@@ -7,21 +7,20 @@ import { enviroment } from '../../enviroments/enviroments';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction, DocumentData, DocumentReference } from '@angular/fire/compat/firestore';
 import { v4 as uuidV4 } from 'uuid';
-import { doc } from 'firebase/firestore';
+import { doc, QuerySnapshot } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  
   users: Observable<{id: string, data: User}[]>;
+  userEmail: string | undefined;
   private _http = inject(HttpClient);
   private baseURL: string = enviroment.apiURL
   private storage: AngularFireStorage;
   private firestore: AngularFirestore;
   private userCollection: AngularFirestoreCollection<User>;
   
-
   constructor(storage: AngularFireStorage, firestore: AngularFirestore) {
     
     this.storage = storage;
@@ -56,12 +55,32 @@ export class UserService {
     return this.users
   }
 
-  async getUserByEmail(email: string) {
+  async getUserByEmail(email: string | null | undefined) {
     return await this.userCollection.ref.where('email', '==', email)
     .get()
   }
 
-  updateUser(id: string) {
-    
+  updateUser(email: string | null | undefined, user: User): Observable<void> {
+    if (!email) {
+      return throwError('El email no es válido');
+    }
+    return from(
+      this.getUserByEmail(email)
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const id_user = querySnapshot.docs[0].id; // Obtener el id
+          console.log('Este es el ID: ', id_user);
+          
+          return this.firestore.collection('user').doc(id_user).update(user)
+        } else {
+          throw new Error('Usuario no encontrado');
+        }
+      })
+    ).pipe(
+      catchError((err) => {
+        console.log('Error al actualizar el usuario en Firestore: ', err);
+        return throwError(err);
+      })
+    )
   };
 }
