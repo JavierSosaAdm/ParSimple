@@ -1,12 +1,15 @@
-<div>
+<div class="container">
     @if (userList.length === 0) {
         <h1>Loading...</h1>
     }
     @if (userList.length > 0) {
         @for(user of userList; track user.id) {
             <h1>Perfil de {{user.data.uid}}</h1>
-            <img src={{user.data.image}} alt="foto de usuario">
-            <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="updateProfile()">
+           
+                <img class="img" src={{user.data.image}} alt="foto de usuario" >
+            
+
+            <!-- <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="updateProfile()">
                 <div class="input-group mb-3">
                     <input 
                       type="file" 
@@ -17,14 +20,19 @@
                       >
                     <label class="input-group-text" for="image">Subir</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Cambiar foto</button>
-            </form>
+                <button type="submit" class="btn btn-primary">Cambiar foto</button> 
+            </form> -->
             <p>Nombre: {{user.data.name}}</p>
             <p>Apellido: {{user.data.lastName}}</p>
             <p>Mail: {{user.data.email}}</p>
             <p>Contraseña: {{user.data.password}}</p>
             <p>Domicilio: {{user.data.address}}</p>
             <p>Teléfono: {{user.data.phone}}</p>
+            <button (click)="openModal()">Editar Perfil</button>
+
+            @if (isOpen) {
+                <app-form-modal (close)="closeModal()"/>
+            }
         }
     }
 </div>

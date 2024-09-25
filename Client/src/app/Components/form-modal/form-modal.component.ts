@@ -7,15 +7,14 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule, NgClass } from '@angular/common';
 import { FireService } from '../../Services/fire.service';
 import { finalize, tap } from 'rxjs/operators';
-import { FormModalComponent } from '../../Components/form-modal/form-modal.component';
 @Component({
-  selector: 'app-client',
+  selector: 'app-form-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, CommonModule, FormModalComponent],
-  templateUrl: './client.component.html',
-  styleUrl: './client.component.css'
+  imports: [ReactiveFormsModule, NgClass, CommonModule],
+  templateUrl: './form-modal.component.html',
+  styleUrl: './form-modal.component.css'
 })
-export class ClientComponent implements OnInit {
+export class FormModalComponent {
   data!: FormGroup;
   uid: string = '';
   userList: { data: User, id: string }[] = [];
@@ -31,26 +30,14 @@ export class ClientComponent implements OnInit {
 
   constructor(private FormBuilder: FormBuilder) {
     this.data = this.FormBuilder.group({
-      uid: [''], // //
+      uid: [''], // 
       address: [''], //
       password: ['', [Validators.minLength(8)]], //
       phone: [''], //
       image: [''], //
     })
   }
-  
-  listaDeUsuarios() {
-    this._userService.getUsers().subscribe(async (users) => {
-      this.userList = users;
-      this._authService.getCurrentUser().subscribe((user) => {
-        this.currentEmail = user?.email
-        this.userList = this.userList.filter(user => user.data.email === this.currentEmail)
-        console.log('email dentro de usuarios: ', this.currentEmail);
-      })
-      console.log('esto es lista de user: ', this.userList);
-    })
-  };
-
+ 
   updateProfile() {
     const userData: User = this.data.value;
     if (this.selectedFile) {
@@ -91,7 +78,10 @@ export class ClientComponent implements OnInit {
     console.log(this.selectedFile); // Debería mostrar el archivo seleccionado
     }
     }
-  
+  hasErrors(field: string, typeError: string) {
+    return this.data.get(field)?.hasError(typeError) && this.data.get(field)?.touched;
+  }
+
     isOpen = false;
   
     openModal() {
@@ -102,11 +92,4 @@ export class ClientComponent implements OnInit {
       this.isOpen = false;
     }
   
-  
-  ngOnInit(): void {
-    this.listaDeUsuarios();
-  }
 }
-
-
-
