@@ -1,6 +1,10 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { FooterComponent } from './Components/footer/footer.component';
+
+
+
 @Component({
   selector: 'app-root',
   standalone: true,

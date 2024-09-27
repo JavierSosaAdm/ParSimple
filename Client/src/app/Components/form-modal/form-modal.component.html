@@ -1,0 +1,68 @@
+<div class="modal">
+  
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Formulario</h2>
+    <form [formGroup]="dataImage" class="row g-3 needs-validation" novalidate (submit)="updateImage()">
+      <div class="input-group mb-3">
+        <input 
+        type="file" 
+        class="form-control" 
+        id="image" 
+        formControlName="image"
+        (change)="onFileSelected($event)"
+        >
+        <label class="input-group-text" for="image">Subir</label>
+        <button type="submit" class="btn btn-primary">Editar</button>
+      </div>
+    </form>
+    <form [formGroup]="dataPassword" class="row g-3 needs-validation" novalidate (submit)="updatePassword()">
+      <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                <input
+                  type="password" 
+                  class="form-control" 
+                  id="exampleInputPassword1"
+                  formControlName="password"
+                  [ngClass]="{'is-valid': hasErrors('password', 'required') || hasErrors('password', 'password')}"
+                >
+                @if (hasErrors('password','required')) {
+                  <span class="text-danger" id="password">Completar contraseña</span>
+                }
+                @if (hasErrors('password','minlength')) {
+                  <span class="text-danger" id="password">Mínimo de 8 caracteres</span>
+                }
+        </div>
+        <button type="submit" class="btn btn-primary">Editar</button>
+    </form>  
+    <form [formGroup]="dataAddress" class="row g-3 needs-validation" novalidate (submit)="updateAddress()">
+      <div class="mb-3">
+          <label for="address" class="form-label">Dirección</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="address" 
+            formControlName="address"
+            aria-describedby="emailHelp"
+          >
+      </div>
+      <button type="submit" class="btn btn-primary">Editar</button>
+    </form>  
+    <form [formGroup]="dataPhone" class="row g-3 needs-validation" novalidate (submit)="updatePhone()">
+      <div class="mb-3">
+          <label for="phone" class="form-label">Teléfono/Celular</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="phone" 
+            formControlName="phone"
+            aria-describedby="emailHelp"
+          >
+      </div>
+
+      <button type="submit" class="btn btn-primary">Editar</button>
+    </form>  
+          <button (click)="ngOnDestroy()">Cerrar</button>
+  </div>
+    
+  </div>

@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.img {
+    height: 500px;
+    width: 400px;
+    object-fit: cover; /* Ajusta la imagen dentro del contenedor */
+    max-width: 100%; /* Asegura que no se extienda más allá del contenedor */
+    max-height: 100%; /* Asegura que no crezca más de lo establecido */
+}

@@ -10,6 +10,7 @@ import { FireService } from '../../Services/fire.service';
 import { FiltersComponent } from '../../Components/filters/filters.component';
 
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
