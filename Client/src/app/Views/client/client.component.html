@@ -1,27 +1,12 @@
 <div class="container">
+    <!-- <app-form-modal [isModalOpen]="isOpen"/> -->
     @if (userList.length === 0) {
         <h1>Loading...</h1>
     }
     @if (userList.length > 0) {
         @for(user of userList; track user.id) {
             <h1>Perfil de {{user.data.uid}}</h1>
-           
-                <img class="img" src={{user.data.image}} alt="foto de usuario" >
-            
-
-            <!-- <form [formGroup]="data" class="row g-3 needs-validation" novalidate (submit)="updateProfile()">
-                <div class="input-group mb-3">
-                    <input 
-                      type="file" 
-                      class="form-control" 
-                      id="image" 
-                      formControlName="image"
-                      (change)="onFileSelected($event)"
-                      >
-                    <label class="input-group-text" for="image">Subir</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Cambiar foto</button> 
-            </form> -->
+            <img class="img" src={{user.data.image}} alt="foto de usuario" >
             <p>Nombre: {{user.data.name}}</p>
             <p>Apellido: {{user.data.lastName}}</p>
             <p>Mail: {{user.data.email}}</p>
@@ -29,10 +14,10 @@
             <p>Domicilio: {{user.data.address}}</p>
             <p>Teléfono: {{user.data.phone}}</p>
             <button (click)="openModal()">Editar Perfil</button>
-
-            @if (isOpen) {
-                <app-form-modal (close)="closeModal()"/>
+            @if (isOpen === true) {
+                <app-form-modal [isModalOpen]="isOpen"/>
             }
+            
         }
     }
 </div>
