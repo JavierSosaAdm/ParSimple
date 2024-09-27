@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalService {
-  isOpen: boolean = false;
+  isOpenSource = new BehaviorSubject<boolean>(false);
+  isOpen$ = this.isOpenSource.asObservable();
   openModal() {
-    console.log('esto es isOpen: ', this.isOpen);
-    this.isOpen = true;
-    console.log('esto es isOpen despues de open model: ', this.isOpen);
+    this.isOpenSource.next(true);
   }
 
   closeModal() {
-    console.log('esto es isOpen: ', this.isOpen);
-    this.isOpen = false;
-    console.log('esto es isOpen despues de open model: ', this.isOpen);
+    this.isOpenSource.next(false);
   }
 }

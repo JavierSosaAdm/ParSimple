@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
 import { FireService } from '../../Services/fire.service';
-import { finalize, tap } from 'rxjs/operators';
+import { ModalService } from '../../Services/modal.service';
 import { FormModalComponent } from '../../Components/form-modal/form-modal.component';
 @Component({
   selector: 'app-client',
@@ -23,11 +23,12 @@ export class ClientComponent implements OnInit {
   filter: { data: User, id: string }[] = [];
   
   isOpen = false;
+  private _modalService = inject(ModalService)
   private _fireService = inject(FireService);
   private _userService = inject(UserService);
   private _authService = inject(AuthService);
   private authService = inject(AngularFireAuth);
-  private modal = FormModalComponent
+  // private modal = FormModalComponent
   public users: {data: User}[] = [];
   private currentEmail: string | null | undefined = '';
   selectedFile: File | null = null;
@@ -54,21 +55,17 @@ export class ClientComponent implements OnInit {
     })
   };
   
-    openModal() {
-      console.log('esto es isOpen: ', this.isOpen);
-      this.isOpen = true;
-      console.log('esto es isOpen despues de open model: ', this.isOpen);
-    }
-  
-    closeModal() {
-      this.isOpen = false;
-    }
-  
+  openModal() {
+    this._modalService.openModal()
+  };
   
   ngOnInit(): void {
     this.listaDeUsuarios();
-  }
-}
+    this._modalService.isOpen$.subscribe(isOpen => {
+      this.isOpen = isOpen;
+    })
+  };
+};
 
 
 

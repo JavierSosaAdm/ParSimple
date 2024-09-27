@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { CommonModule, NgClass } from '@angular/common';
 import { FireService } from '../../Services/fire.service';
 import { finalize, tap } from 'rxjs/operators';
+import { ModalService } from '../../Services/modal.service';
 @Component({
   selector: 'app-form-modal',
   standalone: true,
@@ -26,6 +27,7 @@ export class FormModalComponent implements OnInit, OnDestroy {
   userList: { data: User, id: string }[] = [];
   filter: { data: User, id: string }[] = [];
 
+  private _modalService = inject(ModalService)
   private _fireService = inject(FireService);
   private _userService = inject(UserService);
   private _authService = inject(AuthService);
@@ -147,7 +149,7 @@ export class FormModalComponent implements OnInit, OnDestroy {
     }
   
     closeModal() {
-      this.isOpen = false;
+      this._modalService.closeModal();
       console.log('este cerrar suena');
       
     }
